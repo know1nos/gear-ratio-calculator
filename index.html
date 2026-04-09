@@ -48,42 +48,67 @@
             gap: 10px;
         }
         .header h1 .cog { color: var(--accent); font-size: 1.3rem; }
-        .header p { font-size: 0.85rem; color: var(--text-muted); }
-        .back-link {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            text-decoration: none;
-        }
+        .back-link { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; }
         .back-link:hover { color: var(--text); }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 32px 24px 64px;
+        .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; }
+
+        /* ── Vehicle picker ── */
+        .vehicle-picker {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 22px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
         }
+        .vehicle-picker label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            white-space: nowrap;
+        }
+        .vehicle-picker select {
+            flex: 1;
+            min-width: 220px;
+            background: #0a0a0a;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 0.87rem;
+            padding: 8px 10px;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        .vehicle-picker select:focus { border-color: #444; }
+        .vehicle-picker select option { background: #141414; }
+        .vehicle-hint { font-size: 0.78rem; color: var(--text-muted); }
 
         /* ── Direction banner ── */
         .direction-bar {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             font-size: 0.87rem;
         }
         .direction-bar .label-current { font-weight: 600; }
         .direction-bar .arrow { color: var(--text-muted); }
         .direction-bar .label-new { font-weight: 600; color: var(--accent); }
 
-        /* ── Grid layout ── */
+        /* ── Grid ── */
         .calc-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
-
-        @media (max-width: 720px) {
-            .calc-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 720px) { .calc-grid { grid-template-columns: 1fr; } }
 
         /* ── Cards ── */
         .card {
@@ -92,7 +117,6 @@
             border-radius: var(--radius);
             padding: 20px 22px;
         }
-
         .card-title {
             font-size: 0.9rem;
             font-weight: 700;
@@ -100,25 +124,19 @@
             padding-bottom: 10px;
             border-bottom: 1px solid var(--border);
         }
-        .card-subtitle {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            margin-left: 6px;
-        }
+        .card-sub { font-size: 0.75rem; color: var(--text-muted); font-weight: 400; margin-left: 6px; }
 
-        /* ── Form elements ── */
+        /* ── Form ── */
         .field { margin-bottom: 14px; }
         .field label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
             margin-bottom: 5px;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.05em;
         }
-
-        input[type="number"], select {
+        input[type="number"] {
             width: 100%;
             background: #0a0a0a;
             border: 1px solid var(--border);
@@ -127,21 +145,17 @@
             font-size: 0.87rem;
             padding: 7px 10px;
             outline: none;
-            appearance: none;
-            -webkit-appearance: none;
         }
-        input[type="number"]:focus, select:focus {
-            border-color: #444;
+        input[type="number"]:focus { border-color: #444; }
+        .field-hint {
+            font-size: 0.7rem;
+            color: #555;
+            margin-top: 4px;
+            line-height: 1.5;
         }
-        select option { background: #141414; }
 
-        /* quick-ratio buttons */
-        .ratio-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 6px;
-        }
+        /* quick-ratio chips */
+        .ratio-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
         .ratio-chip {
             font-size: 0.72rem;
             padding: 2px 7px;
@@ -156,11 +170,7 @@
         .ratio-chip.active { border-color: var(--accent); color: var(--accent); }
 
         /* portal toggle */
-        .portal-toggle {
-            border-top: 1px solid var(--border);
-            margin-top: 14px;
-            padding-top: 14px;
-        }
+        .portal-toggle { border-top: 1px solid var(--border); margin-top: 14px; padding-top: 14px; }
         .toggle-label {
             display: flex;
             align-items: center;
@@ -171,14 +181,8 @@
             user-select: none;
         }
         .toggle-label input { cursor: pointer; accent-color: var(--accent); }
-        .portal-hint {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-            line-height: 1.4;
-        }
 
-        /* ── Result rows ── */
+        /* ── Results ── */
         .result-row {
             display: flex;
             justify-content: space-between;
@@ -207,15 +211,9 @@
         .crawl-vals { display: flex; gap: 16px; }
         .crawl-hi { color: var(--text-muted); }
         .crawl-lo { font-weight: 600; color: var(--accent); }
-
         .show-all-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            cursor: pointer;
-            margin-top: 8px;
-            padding: 0;
+            background: none; border: none; color: var(--text-muted);
+            font-size: 0.75rem; cursor: pointer; margin-top: 8px; padding: 0;
         }
         .show-all-btn:hover { color: var(--text); }
 
@@ -233,40 +231,20 @@
         .regear-alert strong { color: var(--accent); }
 
         /* ── Available ratios ── */
-        .ratio-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
+        .ratio-badges { display: flex; flex-wrap: wrap; gap: 6px; }
         .ratio-badge {
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            background: #1a1a1a;
-            border: 1px solid var(--border);
-            color: var(--text-muted);
+            font-size: 0.75rem; padding: 3px 8px; border-radius: 4px;
+            background: #1a1a1a; border: 1px solid var(--border); color: var(--text-muted);
         }
-        .ratio-badge.best {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #fff;
-            font-weight: 700;
-        }
+        .ratio-badge.best { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
 
         /* ── Section heading ── */
         .section-heading {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin: 28px 0 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--text-muted);
+            margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
         }
-        .section-heading:first-child { margin-top: 0; }
 
-        /* ── Hidden ── */
         .hidden { display: none !important; }
     </style>
 </head>
@@ -281,126 +259,157 @@
 
 <div class="container">
 
+    <!-- ── Vehicle picker ── -->
+    <div class="vehicle-picker">
+        <label>Start from</label>
+        <select id="vehicle-select">
+            <option value="">— Pick your vehicle to auto-fill —</option>
+            <optgroup label="TJ Wrangler">
+                <option value="tj-4cyl">TJ 4-cyl Sport (97–02) — AX-5, NP231, 3.07, 29"</option>
+                <option value="tj-6cyl-sport">TJ 6-cyl Sport (97–06) — AX-15, NP231, 3.07, 30"</option>
+                <option value="tj-sahara">TJ Sahara (03–06) — NV3550, NP231, 3.73, 30"</option>
+                <option value="tj-rubicon">TJ Rubicon (03–06) — NSG370, Rock-Trac, 4.10, 30"</option>
+            </optgroup>
+            <optgroup label="JK Wrangler">
+                <option value="jk-sport">JK Sport (07–18) — NSG370, NV241J, 3.21, 30"</option>
+                <option value="jk-rubicon">JK Rubicon (07–18) — NSG370, Rock-Trac, 4.10, 32"</option>
+            </optgroup>
+            <optgroup label="JL Wrangler">
+                <option value="jl-sport">JL Sport (18+) — Aisin AL6, MP3022, 3.45, 31.5"</option>
+                <option value="jl-sahara">JL Sahara (18+) — 8HP75, MP3022, 3.45, 31.5"</option>
+                <option value="jl-rubicon">JL Rubicon (18+) — Aisin AL6, Rock-Trac, 4.10, 33"</option>
+            </optgroup>
+            <optgroup label="XJ Cherokee">
+                <option value="xj-4cyl">XJ 4-cyl (91–01) — AX-5, NP231, 3.07, 29"</option>
+                <option value="xj-6cyl">XJ 6-cyl Sport (91–01) — AX-15, NP231, 3.55, 29"</option>
+                <option value="xj-limited">XJ Limited (91–01) — AW4, NP242, 3.55, 29"</option>
+            </optgroup>
+            <optgroup label="YJ Wrangler">
+                <option value="yj-4cyl">YJ 4-cyl (87–95) — AX-5, NP231, 3.07, 27"</option>
+                <option value="yj-6cyl">YJ 6-cyl (87–95) — AX-15, NP231, 3.07, 29"</option>
+            </optgroup>
+        </select>
+        <span class="vehicle-hint">Both sides auto-fill — then change only what you're upgrading on the right.</span>
+    </div>
+
     <div class="direction-bar">
         <span class="label-current">Current Setup</span>
         <span class="arrow">→</span>
         <span class="label-new">New / Planned</span>
     </div>
 
-    <!-- ── Input Row ── -->
-    <div class="calc-grid" id="inputs-row">
+    <!-- ── Inputs ── -->
+    <div class="calc-grid">
 
-        <!-- Current Inputs -->
         <div class="card">
             <div class="card-title">Current Setup</div>
 
             <div class="field">
                 <label>Tire Diameter (in)</label>
-                <input type="number" id="cur-tire" value="32" step="0.1" min="20" max="60">
+                <input type="number" id="cur-tire" value="30" step="0.1" min="20" max="60">
             </div>
 
             <div class="field">
                 <label>Axle Ratio</label>
-                <input type="number" id="cur-axle" value="3.73" step="0.01" min="1" max="10">
+                <input type="number" id="cur-axle" value="3.07" step="0.01" min="1" max="10">
                 <div class="ratio-chips" id="cur-axle-chips"></div>
             </div>
 
             <div class="field">
-                <label>Transmission</label>
-                <select id="cur-trans"><option value="">Select...</option></select>
+                <label>Transmission — 1st Gear Ratio</label>
+                <input type="number" id="cur-trans" value="3.83" step="0.01" min="1" max="10">
+                <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80</p>
             </div>
 
             <div class="field">
-                <label>Transfer Case</label>
-                <select id="cur-tc"><option value="">Select...</option></select>
+                <label>Transfer Case — Low Range</label>
+                <input type="number" id="cur-tc" value="2.72" step="0.01" min="1" max="6">
+                <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61</p>
             </div>
 
             <div class="portal-toggle">
                 <label class="toggle-label">
-                    <input type="checkbox" id="cur-portal-en">
-                    Portal Axles
+                    <input type="checkbox" id="cur-portal-en"> Portal Axles
                 </label>
-                <div id="cur-portal-field" class="hidden" style="margin-top: 10px;">
-                    <label class="field" style="margin:0">
-                        <span style="display:block;font-size:0.75rem;color:var(--text-muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em;">Portal Ratio</span>
+                <div id="cur-portal-field" class="hidden" style="margin-top:10px;">
+                    <div class="field" style="margin:0">
+                        <label>Portal Ratio</label>
                         <input type="number" id="cur-portal" value="1.22" step="0.01" min="1" max="2">
-                    </label>
-                    <p class="portal-hint">Turn Off Road: 1.11 · 74 Weld: 1.22 · Portal Pros: ~1.22 · Werewolf: ~1.35</p>
+                    </div>
+                    <p class="field-hint">Turn Off Road: 1.11 · 74 Weld / Portal Pros: 1.22 · Werewolf: ~1.35</p>
                 </div>
             </div>
         </div>
 
-        <!-- New Inputs -->
         <div class="card">
-            <div class="card-title">New / Planned <span class="card-subtitle">— what you're building toward</span></div>
+            <div class="card-title">New / Planned <span class="card-sub">— change only what you're upgrading</span></div>
 
             <div class="field">
                 <label>Tire Diameter (in)</label>
-                <input type="number" id="new-tire" value="35" step="0.1" min="20" max="60">
+                <input type="number" id="new-tire" value="30" step="0.1" min="20" max="60">
             </div>
 
             <div class="field">
                 <label>Axle Ratio</label>
-                <input type="number" id="new-axle" value="4.10" step="0.01" min="1" max="10">
+                <input type="number" id="new-axle" value="3.07" step="0.01" min="1" max="10">
                 <div class="ratio-chips" id="new-axle-chips"></div>
             </div>
 
             <div class="field">
-                <label>Transmission</label>
-                <select id="new-trans"><option value="">Select...</option></select>
+                <label>Transmission — 1st Gear Ratio</label>
+                <input type="number" id="new-trans" value="3.83" step="0.01" min="1" max="10">
+                <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80</p>
             </div>
 
             <div class="field">
-                <label>Transfer Case</label>
-                <select id="new-tc"><option value="">Select...</option></select>
+                <label>Transfer Case — Low Range</label>
+                <input type="number" id="new-tc" value="2.72" step="0.01" min="1" max="6">
+                <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61</p>
             </div>
 
             <div class="portal-toggle">
                 <label class="toggle-label">
-                    <input type="checkbox" id="new-portal-en">
-                    Portal Axles
+                    <input type="checkbox" id="new-portal-en"> Portal Axles
                 </label>
-                <div id="new-portal-field" class="hidden" style="margin-top: 10px;">
-                    <label class="field" style="margin:0">
-                        <span style="display:block;font-size:0.75rem;color:var(--text-muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em;">Portal Ratio</span>
+                <div id="new-portal-field" class="hidden" style="margin-top:10px;">
+                    <div class="field" style="margin:0">
+                        <label>Portal Ratio</label>
                         <input type="number" id="new-portal" value="1.22" step="0.01" min="1" max="2">
-                    </label>
-                    <p class="portal-hint">Turn Off Road: 1.11 · 74 Weld: 1.22 · Portal Pros: ~1.22 · Werewolf: ~1.35</p>
+                    </div>
+                    <p class="field-hint">Turn Off Road: 1.11 · 74 Weld / Portal Pros: 1.22 · Werewolf: ~1.35</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ── Results Row ── -->
+    <!-- ── Results ── -->
     <div class="section-heading">Results</div>
     <div class="calc-grid">
 
-        <!-- Current Results -->
-        <div class="card" id="cur-results">
+        <div class="card">
             <div class="card-title">Current Results</div>
             <div class="result-row">
                 <span class="result-label">Effective Ratio</span>
                 <span class="result-value" id="cur-effective">—</span>
             </div>
             <div class="result-row" id="cur-crawl-row">
-                <span class="result-label">Crawl Ratio (4Lo 1st)</span>
+                <span class="result-label">Crawl Ratio (4Lo · 1st)</span>
                 <span class="result-value" id="cur-crawl">—</span>
             </div>
-            <div class="result-row" id="cur-total-row" class="hidden">
-                <span class="result-label">Total Drive Ratio</span>
+            <div class="result-row" id="cur-total-row">
+                <span class="result-label">Total Drive Ratio (w/ portal)</span>
                 <span class="result-value" id="cur-total">—</span>
             </div>
         </div>
 
-        <!-- New Results -->
-        <div class="card" id="new-results">
+        <div class="card">
             <div class="card-title">New Results</div>
             <div class="result-row">
                 <span class="result-label">Effective Ratio</span>
                 <span class="result-value" id="new-effective">—</span>
             </div>
             <div class="result-row" id="new-recommended-row">
-                <span class="result-label">Recommended Ratio</span>
+                <span class="result-label">Recommended Re-gear</span>
                 <span class="result-value accent" id="new-recommended">—</span>
             </div>
             <div class="result-row" id="new-closest-row">
@@ -408,48 +417,31 @@
                 <span class="result-value" id="new-closest">—</span>
             </div>
             <div class="result-row" id="new-crawl-row">
-                <span class="result-label">Crawl Ratio (4Lo 1st)</span>
+                <span class="result-label">Crawl Ratio (4Lo · 1st)</span>
                 <span class="result-value" id="new-crawl">—</span>
             </div>
             <div class="result-row" id="new-total-row">
-                <span class="result-label">Total Drive Ratio</span>
+                <span class="result-label">Total Drive Ratio (w/ portal)</span>
                 <span class="result-value" id="new-total">—</span>
             </div>
             <div id="regear-alert" class="regear-alert hidden"></div>
         </div>
     </div>
 
-    <!-- ── Crawl Ratio Row ── -->
-    <div id="crawl-section" class="hidden">
-        <div class="section-heading">Crawl Ratios by Gear</div>
-        <div class="calc-grid">
-            <div class="card" id="cur-crawl-card">
-                <div class="card-title">Current <span class="card-subtitle" id="cur-drivetrain-label"></span></div>
-                <div id="cur-crawl-table"></div>
-                <button class="show-all-btn hidden" id="cur-show-all" data-open="0">▼ Show all gears</button>
-            </div>
-            <div class="card" id="new-crawl-card">
-                <div class="card-title">New <span class="card-subtitle" id="new-drivetrain-label"></span></div>
-                <div id="new-crawl-table"></div>
-                <button class="show-all-btn hidden" id="new-show-all" data-open="0">▼ Show all gears</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ── RPM Row ── -->
+    <!-- ── RPM ── -->
     <div class="section-heading">RPM at Speed</div>
     <div class="calc-grid">
         <div class="card">
-            <div class="card-title">Current <span class="card-subtitle" id="cur-rpm-label"></span></div>
+            <div class="card-title">Current <span class="card-sub" id="cur-rpm-label"></span></div>
             <div id="cur-rpm-table"></div>
         </div>
         <div class="card">
-            <div class="card-title">New <span class="card-subtitle" id="new-rpm-label"></span></div>
+            <div class="card-title">New <span class="card-sub" id="new-rpm-label"></span></div>
             <div id="new-rpm-table"></div>
         </div>
     </div>
 
-    <!-- ── Available Ratios ── -->
+    <!-- ── Available ratios ── -->
     <div id="available-section" class="hidden">
         <div class="section-heading">Available Ring &amp; Pinion Ratios</div>
         <div class="card">
@@ -460,92 +452,45 @@
 </div>
 
 <script>
-// ─── Data ────────────────────────────────────────────────────────────────────
+// ─── Vehicle presets ──────────────────────────────────────────────────────────
+// tire, axle, transFirst (1st gear ratio), tcLow (low range ratio)
+
+const VEHICLES = {
+    'tj-4cyl':       { tire: 29,   axle: 3.07, transFirst: 3.93, tcLow: 2.72 },
+    'tj-6cyl-sport': { tire: 30,   axle: 3.07, transFirst: 3.83, tcLow: 2.72 },
+    'tj-sahara':     { tire: 30,   axle: 3.73, transFirst: 4.01, tcLow: 2.72 },
+    'tj-rubicon':    { tire: 30,   axle: 4.10, transFirst: 4.46, tcLow: 4.0  },
+    'jk-sport':      { tire: 30,   axle: 3.21, transFirst: 4.46, tcLow: 2.72 },
+    'jk-rubicon':    { tire: 32,   axle: 4.10, transFirst: 4.46, tcLow: 4.0  },
+    'jl-sport':      { tire: 31.5, axle: 3.45, transFirst: 5.13, tcLow: 2.72 },
+    'jl-sahara':     { tire: 31.5, axle: 3.45, transFirst: 4.71, tcLow: 2.72 },
+    'jl-rubicon':    { tire: 33,   axle: 4.10, transFirst: 5.13, tcLow: 4.0  },
+    'xj-4cyl':       { tire: 29,   axle: 3.07, transFirst: 3.93, tcLow: 2.72 },
+    'xj-6cyl':       { tire: 29,   axle: 3.55, transFirst: 3.83, tcLow: 2.72 },
+    'xj-limited':    { tire: 29,   axle: 3.55, transFirst: 2.80, tcLow: 2.72 },
+    'yj-4cyl':       { tire: 27,   axle: 3.07, transFirst: 3.93, tcLow: 2.72 },
+    'yj-6cyl':       { tire: 29,   axle: 3.07, transFirst: 3.83, tcLow: 2.72 },
+};
 
 const COMMON_GEAR_RATIOS = [3.07, 3.21, 3.45, 3.55, 3.73, 4.1, 4.11, 4.56, 4.88, 5.13, 5.38];
 
-const TRANSMISSION_FIRST_GEAR = {
-    "BA-10/5 (5MT)": 3.72,
-    "AX-5 (5MT)": 3.93,
-    "AX-15 (5MT)": 3.83,
-    "NV3550 (5MT)": 4.01,
-    "NSG370 (6MT)": 4.46,
-    "Aisin AL6 (6MT)": 5.13,
-    "30RH (3AT)": 2.74,
-    "32RH (3AT)": 2.74,
-    "42RLE (4AT)": 2.84,
-    "AW4 (4AT)": 2.80,
-    "W5A580 (5AT)": 3.59,
-    "850RE (8AT)": 4.71,
-    "8HP75 (8AT)": 4.71,
-    "TorqueFlite 8P75PH (8AT)": 4.71,
-    "948TE (9AT)": 4.70,
-};
+// ─── Vehicle picker ───────────────────────────────────────────────────────────
 
-const TRANSFER_CASE_LOW_RANGE = {
-    "NP207": 2.61,
-    "NP231": 2.72,
-    "NP231 Command-Trac": 2.72,
-    "NP242 Selec-Trac": 2.72,
-    "NP249 Quadra-Trac": 2.72,
-    "NV140 Quadra-Trac I": 2.72,
-    "NV241J Command-Trac": 2.72,
-    "NV241OR Rock-Trac": 4.0,
-    "NV245 Quadra-Trac II": 2.72,
-    "NV247 Quadra-Trac II": 2.72,
-    "MP1622 Command-Trac": 2.72,
-    "MP3022": 2.72,
-    "MP3022 Selec-Trac": 2.72,
-    "MP3023 Quadra-Trac II": 2.72,
-    "MP3024 Selec-Trac": 2.72,
-};
-
-const TRANSFER_CASE_HIGH_RANGE = {
-    "NP207": 1.0, "NP231": 1.0, "NP231 Command-Trac": 1.0, "NP242 Selec-Trac": 1.0,
-    "NP249 Quadra-Trac": 1.0, "NV140 Quadra-Trac I": 1.0, "NV241J Command-Trac": 1.0,
-    "NV241OR Rock-Trac": 1.0, "NV245 Quadra-Trac II": 1.0, "NV247 Quadra-Trac II": 1.0,
-    "MP1622 Command-Trac": 1.0, "MP3022": 1.0, "MP3022 Selec-Trac": 1.0,
-    "MP3023 Quadra-Trac II": 1.0, "MP3024 Selec-Trac": 1.0,
-};
-
-const TRANSMISSION_ALL_GEARS = {
-    "BA-10/5 (5MT)": [{g:"1st",r:3.72},{g:"2nd",r:2.04},{g:"3rd",r:1.39},{g:"4th",r:1.00},{g:"5th",r:0.87},{g:"R",r:3.55}],
-    "AX-5 (5MT)":    [{g:"1st",r:3.93},{g:"2nd",r:2.33},{g:"3rd",r:1.44},{g:"4th",r:1.00},{g:"5th",r:0.85},{g:"R",r:4.74}],
-    "AX-15 (5MT)":   [{g:"1st",r:3.83},{g:"2nd",r:2.33},{g:"3rd",r:1.44},{g:"4th",r:1.00},{g:"5th",r:0.79},{g:"R",r:4.22}],
-    "NV3550 (5MT)":  [{g:"1st",r:4.01},{g:"2nd",r:2.33},{g:"3rd",r:1.39},{g:"4th",r:1.00},{g:"5th",r:0.78},{g:"R",r:3.57}],
-    "NSG370 (6MT)":  [{g:"1st",r:4.46},{g:"2nd",r:2.61},{g:"3rd",r:1.72},{g:"4th",r:1.25},{g:"5th",r:1.00},{g:"6th",r:0.84},{g:"R",r:4.06}],
-    "Aisin AL6 (6MT)":[{g:"1st",r:5.13},{g:"2nd",r:2.63},{g:"3rd",r:1.53},{g:"4th",r:1.00},{g:"5th",r:0.81},{g:"6th",r:0.72},{g:"R",r:4.49}],
-    "30RH (3AT)":    [{g:"1st",r:2.74},{g:"2nd",r:1.54},{g:"3rd",r:1.00},{g:"R",r:2.03}],
-    "32RH (3AT)":    [{g:"1st",r:2.74},{g:"2nd",r:1.54},{g:"3rd",r:1.00},{g:"R",r:2.03}],
-    "AW4 (4AT)":     [{g:"1st",r:2.80},{g:"2nd",r:1.53},{g:"3rd",r:1.00},{g:"4th",r:0.75},{g:"R",r:2.03}],
-    "42RLE (4AT)":   [{g:"1st",r:2.84},{g:"2nd",r:1.57},{g:"3rd",r:1.00},{g:"4th",r:0.69},{g:"R",r:2.21}],
-    "W5A580 (5AT)":  [{g:"1st",r:3.59},{g:"2nd",r:2.19},{g:"3rd",r:1.41},{g:"4th",r:1.00},{g:"5th",r:0.83},{g:"R",r:3.16}],
-    "850RE (8AT)":   [{g:"1st",r:4.71},{g:"2nd",r:3.13},{g:"3rd",r:2.10},{g:"4th",r:1.67},{g:"5th",r:1.28},{g:"6th",r:1.00},{g:"7th",r:0.84},{g:"8th",r:0.67},{g:"R",r:3.30}],
-    "8HP75 (8AT)":   [{g:"1st",r:4.71},{g:"2nd",r:3.13},{g:"3rd",r:2.10},{g:"4th",r:1.67},{g:"5th",r:1.28},{g:"6th",r:1.00},{g:"7th",r:0.84},{g:"8th",r:0.67},{g:"R",r:3.30}],
-    "TorqueFlite 8P75PH (8AT)":[{g:"1st",r:4.71},{g:"2nd",r:3.13},{g:"3rd",r:2.10},{g:"4th",r:1.67},{g:"5th",r:1.28},{g:"6th",r:1.00},{g:"7th",r:0.84},{g:"8th",r:0.67},{g:"R",r:3.30}],
-    "948TE (9AT)":   [{g:"1st",r:4.70},{g:"2nd",r:2.84},{g:"3rd",r:1.91},{g:"4th",r:1.38},{g:"5th",r:1.00},{g:"6th",r:0.81},{g:"7th",r:0.70},{g:"8th",r:0.58},{g:"9th",r:0.47},{g:"R",r:3.82}],
-};
-
-const ALL_TRANSMISSIONS = Object.keys(TRANSMISSION_ALL_GEARS);
-const ALL_TRANSFER_CASES = Object.keys(TRANSFER_CASE_LOW_RANGE);
-
-// ─── Populate dropdowns ───────────────────────────────────────────────────────
-
-function populateSelect(el, options) {
-    options.forEach(function(o) {
-        var opt = document.createElement('option');
-        opt.value = o;
-        opt.textContent = o;
-        el.appendChild(opt);
+document.getElementById('vehicle-select').addEventListener('change', function() {
+    var v = VEHICLES[this.value];
+    if (!v) return;
+    // fill both sides with stock specs
+    ['cur', 'new'].forEach(function(p) {
+        document.getElementById(p + '-tire').value = v.tire;
+        document.getElementById(p + '-axle').value = v.axle;
+        document.getElementById(p + '-trans').value = v.transFirst;
+        document.getElementById(p + '-tc').value = v.tcLow;
+        updateChips(p + '-axle-chips', v.axle);
     });
-}
+    recalc();
+});
 
-populateSelect(document.getElementById('cur-trans'), ALL_TRANSMISSIONS);
-populateSelect(document.getElementById('new-trans'), ALL_TRANSMISSIONS);
-populateSelect(document.getElementById('cur-tc'), ALL_TRANSFER_CASES);
-populateSelect(document.getElementById('new-tc'), ALL_TRANSFER_CASES);
-
-// ─── Ratio chips ─────────────────────────────────────────────────────────────
+// ─── Ratio chips ──────────────────────────────────────────────────────────────
 
 function buildChips(containerId, inputId) {
     var container = document.getElementById(containerId);
@@ -566,8 +511,7 @@ function buildChips(containerId, inputId) {
 }
 
 function updateChips(containerId, val) {
-    var chips = document.querySelectorAll('#' + containerId + ' .ratio-chip');
-    chips.forEach(function(c) {
+    document.querySelectorAll('#' + containerId + ' .ratio-chip').forEach(function(c) {
         c.classList.toggle('active', parseFloat(c.textContent) === parseFloat(val));
     });
 }
@@ -575,7 +519,7 @@ function updateChips(containerId, val) {
 buildChips('cur-axle-chips', 'cur-axle');
 buildChips('new-axle-chips', 'new-axle');
 
-// ─── Portal toggle ────────────────────────────────────────────────────────────
+// ─── Portal toggles ───────────────────────────────────────────────────────────
 
 document.getElementById('cur-portal-en').addEventListener('change', function() {
     document.getElementById('cur-portal-field').classList.toggle('hidden', !this.checked);
@@ -586,39 +530,13 @@ document.getElementById('new-portal-en').addEventListener('change', function() {
     recalc();
 });
 
-// ─── Calculations ─────────────────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function findClosest(target) {
-    return COMMON_GEAR_RATIOS.reduce(function(prev, curr) {
-        return Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev;
+    return COMMON_GEAR_RATIOS.reduce(function(p, c) {
+        return Math.abs(c - target) < Math.abs(p - target) ? c : p;
     });
 }
-
-function calcEffective(axle, portal, stockTire, newTire) {
-    return (axle * portal) * (stockTire / newTire);
-}
-
-function calcRecommended(newTire, stockTire, baseAxle, portal) {
-    return ((newTire / stockTire) * baseAxle) / portal;
-}
-
-function calcRpm(speed, axle, portal, tireDiam) {
-    return Math.round((speed * axle * portal * 1.0 * 336) / tireDiam);
-}
-
-function calcPerGearCrawl(axle, portal, gears, tcHi, tcLo) {
-    var totalAxle = axle * portal;
-    return gears.filter(function(g) { return g.g !== 'R'; }).map(function(g) {
-        return {
-            gear: g.g,
-            ratio: g.r,
-            highRange: totalAxle * g.r * tcHi,
-            lowRange: totalAxle * g.r * tcLo,
-        };
-    });
-}
-
-// ─── Render helpers ───────────────────────────────────────────────────────────
 
 function rpmClass(rpm) {
     if (rpm > 3000) return 'danger';
@@ -628,76 +546,50 @@ function rpmClass(rpm) {
 
 function renderRpmTable(containerId, axle, portal, tireDiam) {
     var el = document.getElementById(containerId);
-    var speeds = [50, 55, 60, 65, 70, 75, 80];
-    el.innerHTML = speeds.map(function(s) {
-        var rpm = calcRpm(s, axle, portal, tireDiam);
-        var cls = rpmClass(rpm);
+    el.innerHTML = [50,55,60,65,70,75,80].map(function(s) {
+        var rpm = Math.round((s * axle * portal * 336) / tireDiam);
         return '<div class="result-row"><span class="result-label">' + s + ' mph</span>' +
-               '<span class="result-value ' + cls + '">' + rpm.toLocaleString() + ' RPM</span></div>';
+               '<span class="result-value ' + rpmClass(rpm) + '">' + rpm.toLocaleString() + ' RPM</span></div>';
     }).join('');
 }
 
-function renderCrawlTable(containerId, showAllBtnId, rows) {
-    var el = document.getElementById(containerId);
-    var btn = document.getElementById(showAllBtnId);
-    if (!rows || rows.length === 0) {
-        el.innerHTML = '<div style="font-size:0.82rem;color:var(--text-muted);padding:4px 0;">Select transmission and transfer case to see crawl ratios.</div>';
-        btn.classList.add('hidden');
-        return;
-    }
-
-    var summaryRows = rows.length <= 2 ? rows : [rows[0], rows[rows.length - 1]];
-    var open = btn.getAttribute('data-open') === '1';
-    var displayRows = open ? rows : summaryRows;
-
-    el.innerHTML = displayRows.map(function(r) {
-        return '<div class="crawl-row">' +
-               '<span class="crawl-gear">' + r.gear + ' (' + r.ratio.toFixed(2) + ')</span>' +
-               '<span class="crawl-vals">' +
-               '<span class="crawl-hi">4Hi: ' + r.highRange.toFixed(1) + ':1</span>' +
-               '<span class="crawl-lo">4Lo: ' + r.lowRange.toFixed(1) + ':1</span>' +
-               '</span></div>';
-    }).join('');
-
-    if (rows.length > 2) {
-        btn.classList.remove('hidden');
-        btn.textContent = open ? '▲ Hide gears' : '▼ Show all gears';
-    } else {
-        btn.classList.add('hidden');
-    }
+function setVisible(id, show) {
+    document.getElementById(id).classList.toggle('hidden', !show);
 }
 
-// ─── Main recalc ──────────────────────────────────────────────────────────────
+// ─── State ────────────────────────────────────────────────────────────────────
 
-function getState(prefix) {
-    var portalEn = document.getElementById(prefix + '-portal-en').checked;
+function getState(p) {
+    var portalEn = document.getElementById(p + '-portal-en').checked;
     return {
-        tire: parseFloat(document.getElementById(prefix + '-tire').value) || 32,
-        axle: parseFloat(document.getElementById(prefix + '-axle').value) || 3.73,
-        trans: document.getElementById(prefix + '-trans').value,
-        tc: document.getElementById(prefix + '-tc').value,
-        portalEn: portalEn,
-        portal: portalEn ? (parseFloat(document.getElementById(prefix + '-portal').value) || 1.22) : 1.0,
+        tire:       parseFloat(document.getElementById(p + '-tire').value)  || 30,
+        axle:       parseFloat(document.getElementById(p + '-axle').value)  || 3.73,
+        transFirst: parseFloat(document.getElementById(p + '-trans').value) || 0,
+        tcLow:      parseFloat(document.getElementById(p + '-tc').value)    || 0,
+        portalEn:   portalEn,
+        portal:     portalEn ? (parseFloat(document.getElementById(p + '-portal').value) || 1.22) : 1.0,
     };
 }
+
+// ─── Recalc ───────────────────────────────────────────────────────────────────
 
 function recalc() {
     var cur = getState('cur');
     var nw  = getState('new');
 
-    // ── Current effective ratio ──
-    var curEffective = calcEffective(cur.axle, cur.portal, cur.tire, cur.tire);
-    document.getElementById('cur-effective').textContent = curEffective.toFixed(2) + ':1';
+    var curTotal = cur.axle * cur.portal;
+    var newTotal = nw.axle  * nw.portal;
 
-    // ── New effective ratio ──
-    var newEffective = calcEffective(nw.axle, nw.portal, cur.tire, nw.tire);
-    document.getElementById('new-effective').textContent = newEffective.toFixed(2) + ':1';
+    // Effective ratio (what bigger tires do to feel of gearing)
+    var curEff = curTotal * (cur.tire / cur.tire);  // baseline — always current vs itself
+    var newEff = newTotal * (cur.tire / nw.tire);   // new setup vs current tires as baseline
+    document.getElementById('cur-effective').textContent = curTotal.toFixed(2) + ':1';
+    document.getElementById('new-effective').textContent = newEff.toFixed(2) + ':1';
 
-    // ── Recommended / closest (only if tires changed) ──
+    // Recommended re-gear and closest available (only when tires changed)
     var tiresChanged = cur.tire !== nw.tire;
-    var newRec = calcRecommended(nw.tire, cur.tire, cur.axle, nw.portal);
+    var newRec = ((nw.tire / cur.tire) * cur.axle) / nw.portal;
     var closest = findClosest(newRec);
-
     setVisible('new-recommended-row', tiresChanged);
     setVisible('new-closest-row', tiresChanged);
     if (tiresChanged) {
@@ -705,8 +597,8 @@ function recalc() {
         document.getElementById('new-closest').textContent = closest + ':1';
     }
 
-    // ── Regear alert ──
-    var needsRegear = tiresChanged && newEffective < (cur.axle * cur.portal) * 0.9;
+    // Regear alert
+    var needsRegear = tiresChanged && newEff < curTotal * 0.9;
     var alertEl = document.getElementById('regear-alert');
     if (needsRegear) {
         alertEl.classList.remove('hidden');
@@ -715,122 +607,47 @@ function recalc() {
         alertEl.classList.add('hidden');
     }
 
-    // ── Available ratios ──
-    var availableSection = document.getElementById('available-section');
-    var badgesEl = document.getElementById('available-badges');
+    // Available ratios
+    setVisible('available-section', tiresChanged);
     if (tiresChanged) {
-        availableSection.classList.remove('hidden');
-        badgesEl.innerHTML = COMMON_GEAR_RATIOS.map(function(r) {
-            var isBest = r === closest;
-            return '<span class="ratio-badge' + (isBest ? ' best' : '') + '">' + r + '</span>';
+        document.getElementById('available-badges').innerHTML = COMMON_GEAR_RATIOS.map(function(r) {
+            return '<span class="ratio-badge' + (r === closest ? ' best' : '') + '">' + r + '</span>';
         }).join('');
-    } else {
-        availableSection.classList.add('hidden');
     }
 
-    // ── Crawl ratios ──
-    var curTcLo = TRANSFER_CASE_LOW_RANGE[cur.tc] || 0;
-    var curTcHi = TRANSFER_CASE_HIGH_RANGE[cur.tc] || 1.0;
-    var newTcLo = TRANSFER_CASE_LOW_RANGE[nw.tc] || 0;
-    var newTcHi = TRANSFER_CASE_HIGH_RANGE[nw.tc] || 1.0;
-    var curFirstGear = TRANSMISSION_FIRST_GEAR[cur.trans] || 0;
-    var newFirstGear = TRANSMISSION_FIRST_GEAR[nw.trans] || 0;
+    // Crawl ratio (axle × portal × 1st gear × TC low range)
+    var curCrawl = cur.transFirst && cur.tcLow ? curTotal * cur.transFirst * cur.tcLow : null;
+    var newCrawl = nw.transFirst  && nw.tcLow  ? newTotal * nw.transFirst  * nw.tcLow  : null;
+    setVisible('cur-crawl-row', !!curCrawl);
+    setVisible('new-crawl-row', !!newCrawl);
+    if (curCrawl) document.getElementById('cur-crawl').textContent = curCrawl.toFixed(1) + ':1';
+    if (newCrawl) document.getElementById('new-crawl').textContent = newCrawl.toFixed(1) + ':1';
 
-    var curCrawl = (cur.axle * cur.portal * curFirstGear * curTcLo) || null;
-    var newCrawl = (nw.axle * nw.portal * newFirstGear * newTcLo) || null;
+    // Portal total drive ratio rows
+    setVisible('cur-total-row', cur.portalEn);
+    setVisible('new-total-row', nw.portalEn);
+    if (cur.portalEn) document.getElementById('cur-total').textContent = curTotal.toFixed(2) + ':1';
+    if (nw.portalEn)  document.getElementById('new-total').textContent = newTotal.toFixed(2) + ':1';
 
-    var curCrawlRow = document.getElementById('cur-crawl-row');
-    var newCrawlRow = document.getElementById('new-crawl-row');
-
-    if (curCrawl) {
-        curCrawlRow.classList.remove('hidden');
-        document.getElementById('cur-crawl').textContent = curCrawl.toFixed(1) + ':1';
-    } else {
-        curCrawlRow.classList.add('hidden');
-    }
-
-    if (newCrawl) {
-        newCrawlRow.classList.remove('hidden');
-        document.getElementById('new-crawl').textContent = newCrawl.toFixed(1) + ':1';
-    } else {
-        newCrawlRow.classList.add('hidden');
-    }
-
-    // ── Portal total drive ratio ──
-    var curTotalRow = document.getElementById('cur-total-row');
-    var newTotalRow = document.getElementById('new-total-row');
-    if (cur.portalEn) {
-        curTotalRow.classList.remove('hidden');
-        document.getElementById('cur-total').textContent = (cur.axle * cur.portal).toFixed(2) + ':1';
-    } else {
-        curTotalRow.classList.add('hidden');
-    }
-    if (nw.portalEn) {
-        newTotalRow.classList.remove('hidden');
-        document.getElementById('new-total').textContent = (nw.axle * nw.portal).toFixed(2) + ':1';
-    } else {
-        newTotalRow.classList.add('hidden');
-    }
-
-    // ── Per-gear crawl tables ──
-    var curGears = TRANSMISSION_ALL_GEARS[cur.trans] || [];
-    var newGears = TRANSMISSION_ALL_GEARS[nw.trans] || [];
-    var curPerGear = (curGears.length && curTcLo) ? calcPerGearCrawl(cur.axle, cur.portal, curGears, curTcHi, curTcLo) : [];
-    var newPerGear = (newGears.length && newTcLo) ? calcPerGearCrawl(nw.axle, nw.portal, newGears, newTcHi, newTcLo) : [];
-
-    var hasCrawl = curPerGear.length > 0 || newPerGear.length > 0;
-    document.getElementById('crawl-section').classList.toggle('hidden', !hasCrawl);
-
-    renderCrawlTable('cur-crawl-table', 'cur-show-all', curPerGear);
-    renderCrawlTable('new-crawl-table', 'new-show-all', newPerGear);
-
-    if (cur.trans && cur.tc) {
-        document.getElementById('cur-drivetrain-label').textContent = '— ' + cur.trans.replace(/ \(\w+\)/, '') + ' + ' + cur.tc;
-    } else {
-        document.getElementById('cur-drivetrain-label').textContent = '';
-    }
-    if (nw.trans && nw.tc) {
-        document.getElementById('new-drivetrain-label').textContent = '— ' + nw.trans.replace(/ \(\w+\)/, '') + ' + ' + nw.tc;
-    } else {
-        document.getElementById('new-drivetrain-label').textContent = '';
-    }
-
-    // ── RPM tables ──
+    // RPM tables
     renderRpmTable('cur-rpm-table', cur.axle, cur.portal, cur.tire);
-    renderRpmTable('new-rpm-table', nw.axle, nw.portal, nw.tire);
-    document.getElementById('cur-rpm-label').textContent = '— ' + cur.axle + (cur.portalEn ? ' × ' + cur.portal + ' portal' : '') + ' gears, ' + cur.tire + '" tires';
-    document.getElementById('new-rpm-label').textContent = '— ' + nw.axle + (nw.portalEn ? ' × ' + nw.portal + ' portal' : '') + ' gears, ' + nw.tire + '" tires';
+    renderRpmTable('new-rpm-table', nw.axle,  nw.portal,  nw.tire);
+    document.getElementById('cur-rpm-label').textContent = '— ' + cur.axle + (cur.portalEn ? ' × ' + cur.portal + ' portal' : '') + ', ' + cur.tire + '" tires';
+    document.getElementById('new-rpm-label').textContent = '— ' + nw.axle  + (nw.portalEn  ? ' × ' + nw.portal  + ' portal' : '') + ', ' + nw.tire  + '" tires';
 
-    // ── Chip sync ──
+    // Chip sync
     updateChips('cur-axle-chips', cur.axle);
     updateChips('new-axle-chips', nw.axle);
 }
-
-function setVisible(id, visible) {
-    document.getElementById(id).classList.toggle('hidden', !visible);
-}
-
-// ─── Show-all toggle ──────────────────────────────────────────────────────────
-
-document.getElementById('cur-show-all').addEventListener('click', function() {
-    this.setAttribute('data-open', this.getAttribute('data-open') === '1' ? '0' : '1');
-    recalc();
-});
-document.getElementById('new-show-all').addEventListener('click', function() {
-    this.setAttribute('data-open', this.getAttribute('data-open') === '1' ? '0' : '1');
-    recalc();
-});
 
 // ─── Event listeners ──────────────────────────────────────────────────────────
 
 ['cur-tire','cur-axle','cur-trans','cur-tc','cur-portal',
  'new-tire','new-axle','new-trans','new-tc','new-portal'].forEach(function(id) {
     var el = document.getElementById(id);
-    if (el) el.addEventListener('input', recalc);
-    if (el) el.addEventListener('change', recalc);
+    if (el) { el.addEventListener('input', recalc); el.addEventListener('change', recalc); }
 });
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
 recalc();
 </script>
 </body>
