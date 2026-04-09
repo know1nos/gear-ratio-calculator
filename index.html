@@ -288,6 +288,42 @@
                 <option value="yj-4cyl">YJ 4-cyl (87–95) — AX-5, NP231, 3.07, 27"</option>
                 <option value="yj-6cyl">YJ 6-cyl (87–95) — AX-15, NP231, 3.07, 29"</option>
             </optgroup>
+            <optgroup label="Toyota 4Runner">
+                <option value="t4r-sr5-5th">4Runner SR5 (10+) — A750F auto, 3.73, 31.6"</option>
+                <option value="t4r-trdpro-5th">4Runner TRD Pro (10+) — A750F auto, 3.909, 31.6"</option>
+                <option value="t4r-4th">4Runner V6 (03–09) — A340F auto, 3.73, 30.6"</option>
+            </optgroup>
+            <optgroup label="Toyota Tacoma">
+                <option value="taco-v6-auto-2">Tacoma V6 auto (05–15) — A750F, 3.909, 30.6"</option>
+                <option value="taco-v6-mt-2">Tacoma V6 manual (05–15) — R151F, 3.909, 30.6"</option>
+                <option value="taco-v6-3rd">Tacoma V6 (16+) — A750F, 3.909, 30.6"</option>
+                <option value="taco-trdpro-3rd">Tacoma TRD Pro (16+) — A750F, 3.909, 30.6"</option>
+            </optgroup>
+            <optgroup label="Toyota Other">
+                <option value="fjc-auto">FJ Cruiser auto (07–14) — A750F, 3.909, 31.6"</option>
+                <option value="fjc-mt">FJ Cruiser manual (07–14) — R150F, 3.909, 31.6"</option>
+                <option value="lc200">Land Cruiser 200 (08–21) — AB60F auto, 3.909, 33.5"</option>
+            </optgroup>
+            <optgroup label="Ford Bronco">
+                <option value="bronco-base">Bronco base (21+) — 7MT/10AT, 3.73, 32"</option>
+                <option value="bronco-sasquatch">Bronco Sasquatch (21+) — 7MT/10AT, 4.70, 35"</option>
+            </optgroup>
+            <optgroup label="Ford Other">
+                <option value="raptor-gen2">F-150 Raptor Gen 2 (17–20) — 10R80, 3.55, 34.6"</option>
+                <option value="ranger-raptor">Ranger Raptor (19+) — 10AT, 3.73, 31.6"</option>
+            </optgroup>
+            <optgroup label="Chevy / GMC">
+                <option value="colorado-zr2">Colorado / Canyon ZR2 (17+) — 8L45, 3.42, 31"</option>
+            </optgroup>
+            <optgroup label="Nissan">
+                <option value="xterra-auto">Xterra V6 auto (05–15) — RE5R05A, 3.357, 30.5"</option>
+                <option value="xterra-mt">Xterra V6 manual (05–15) — 6MT, 3.692, 30.5"</option>
+                <option value="frontier-auto">Frontier V6 auto (05–21) — 5AT, 3.357, 30.6"</option>
+                <option value="frontier-mt">Frontier V6 manual (05–21) — 6MT, 3.692, 30.6"</option>
+            </optgroup>
+            <optgroup label="Suzuki">
+                <option value="samurai">Samurai (86–95) — 5MT, 3.727, 27"</option>
+            </optgroup>
         </select>
         <span class="vehicle-hint">Both sides auto-fill — then change only what you're upgrading on the right.</span>
     </div>
@@ -318,13 +354,13 @@
             <div class="field">
                 <label>Transmission — 1st Gear Ratio</label>
                 <input type="number" id="cur-trans" value="3.83" step="0.01" min="1" max="10">
-                <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80</p>
+                <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
             </div>
 
             <div class="field">
                 <label>Transfer Case — Low Range</label>
                 <input type="number" id="cur-tc" value="2.72" step="0.01" min="1" max="6">
-                <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61</p>
+                <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61 · Toyota ADD: 2.566 · Nissan: 2.50 · Bronco Sasquatch: 3.06 · Raptor: 2.64 · Samurai: 1.94</p>
             </div>
 
             <div class="portal-toggle">
@@ -358,13 +394,13 @@
             <div class="field">
                 <label>Transmission — 1st Gear Ratio</label>
                 <input type="number" id="new-trans" value="3.83" step="0.01" min="1" max="10">
-                <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80</p>
+                <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
             </div>
 
             <div class="field">
                 <label>Transfer Case — Low Range</label>
                 <input type="number" id="new-tc" value="2.72" step="0.01" min="1" max="6">
-                <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61</p>
+                <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61 · Toyota ADD: 2.566 · Nissan: 2.50 · Bronco Sasquatch: 3.06 · Raptor: 2.64 · Samurai: 1.94</p>
             </div>
 
             <div class="portal-toggle">
@@ -456,20 +492,53 @@
 // tire, axle, transFirst (1st gear ratio), tcLow (low range ratio)
 
 const VEHICLES = {
-    'tj-4cyl':       { tire: 29,   axle: 3.07, transFirst: 3.93, tcLow: 2.72 },
-    'tj-6cyl-sport': { tire: 30,   axle: 3.07, transFirst: 3.83, tcLow: 2.72 },
-    'tj-sahara':     { tire: 30,   axle: 3.73, transFirst: 4.01, tcLow: 2.72 },
-    'tj-rubicon':    { tire: 30,   axle: 4.10, transFirst: 4.46, tcLow: 4.0  },
-    'jk-sport':      { tire: 30,   axle: 3.21, transFirst: 4.46, tcLow: 2.72 },
-    'jk-rubicon':    { tire: 32,   axle: 4.10, transFirst: 4.46, tcLow: 4.0  },
-    'jl-sport':      { tire: 31.5, axle: 3.45, transFirst: 5.13, tcLow: 2.72 },
-    'jl-sahara':     { tire: 31.5, axle: 3.45, transFirst: 4.71, tcLow: 2.72 },
-    'jl-rubicon':    { tire: 33,   axle: 4.10, transFirst: 5.13, tcLow: 4.0  },
-    'xj-4cyl':       { tire: 29,   axle: 3.07, transFirst: 3.93, tcLow: 2.72 },
-    'xj-6cyl':       { tire: 29,   axle: 3.55, transFirst: 3.83, tcLow: 2.72 },
-    'xj-limited':    { tire: 29,   axle: 3.55, transFirst: 2.80, tcLow: 2.72 },
-    'yj-4cyl':       { tire: 27,   axle: 3.07, transFirst: 3.93, tcLow: 2.72 },
-    'yj-6cyl':       { tire: 29,   axle: 3.07, transFirst: 3.83, tcLow: 2.72 },
+    // ── Jeep TJ ──
+    'tj-4cyl':       { tire: 29,   axle: 3.07,  transFirst: 3.93, tcLow: 2.72  },
+    'tj-6cyl-sport': { tire: 30,   axle: 3.07,  transFirst: 3.83, tcLow: 2.72  },
+    'tj-sahara':     { tire: 30,   axle: 3.73,  transFirst: 4.01, tcLow: 2.72  },
+    'tj-rubicon':    { tire: 30,   axle: 4.10,  transFirst: 4.46, tcLow: 4.0   },
+    // ── Jeep JK ──
+    'jk-sport':      { tire: 30,   axle: 3.21,  transFirst: 4.46, tcLow: 2.72  },
+    'jk-rubicon':    { tire: 32,   axle: 4.10,  transFirst: 4.46, tcLow: 4.0   },
+    // ── Jeep JL ──
+    'jl-sport':      { tire: 31.5, axle: 3.45,  transFirst: 5.13, tcLow: 2.72  },
+    'jl-sahara':     { tire: 31.5, axle: 3.45,  transFirst: 4.71, tcLow: 2.72  },
+    'jl-rubicon':    { tire: 33,   axle: 4.10,  transFirst: 5.13, tcLow: 4.0   },
+    // ── Jeep XJ ──
+    'xj-4cyl':       { tire: 29,   axle: 3.07,  transFirst: 3.93, tcLow: 2.72  },
+    'xj-6cyl':       { tire: 29,   axle: 3.55,  transFirst: 3.83, tcLow: 2.72  },
+    'xj-limited':    { tire: 29,   axle: 3.55,  transFirst: 2.80, tcLow: 2.72  },
+    // ── Jeep YJ ──
+    'yj-4cyl':       { tire: 27,   axle: 3.07,  transFirst: 3.93, tcLow: 2.72  },
+    'yj-6cyl':       { tire: 29,   axle: 3.07,  transFirst: 3.83, tcLow: 2.72  },
+    // ── Toyota 4Runner ──
+    't4r-sr5-5th':   { tire: 31.6, axle: 3.73,  transFirst: 3.52, tcLow: 2.566 },
+    't4r-trdpro-5th':{ tire: 31.6, axle: 3.909, transFirst: 3.52, tcLow: 2.566 },
+    't4r-4th':       { tire: 30.6, axle: 3.73,  transFirst: 2.80, tcLow: 2.566 },
+    // ── Toyota Tacoma ──
+    'taco-v6-auto-2':{ tire: 30.6, axle: 3.909, transFirst: 3.52, tcLow: 2.566 },
+    'taco-v6-mt-2':  { tire: 30.6, axle: 3.909, transFirst: 3.93, tcLow: 2.566 },
+    'taco-v6-3rd':   { tire: 30.6, axle: 3.909, transFirst: 3.52, tcLow: 2.566 },
+    'taco-trdpro-3rd':{ tire: 30.6, axle: 3.909, transFirst: 3.52, tcLow: 2.566 },
+    // ── Toyota FJ / LC ──
+    'fjc-auto':      { tire: 31.6, axle: 3.909, transFirst: 3.52, tcLow: 2.566 },
+    'fjc-mt':        { tire: 31.6, axle: 3.909, transFirst: 3.93, tcLow: 2.566 },
+    'lc200':         { tire: 33.5, axle: 3.909, transFirst: 3.30, tcLow: 2.566 },
+    // ── Ford Bronco ──
+    'bronco-base':      { tire: 32.0, axle: 3.73,  transFirst: 4.70, tcLow: 2.72  },
+    'bronco-sasquatch': { tire: 35.0, axle: 4.70,  transFirst: 4.70, tcLow: 3.06  },
+    // ── Ford Other ──
+    'raptor-gen2':   { tire: 34.6, axle: 3.55,  transFirst: 4.70, tcLow: 2.64  },
+    'ranger-raptor': { tire: 31.6, axle: 3.73,  transFirst: 4.70, tcLow: 2.64  },
+    // ── Chevy / GMC ──
+    'colorado-zr2':  { tire: 31.0, axle: 3.42,  transFirst: 4.56, tcLow: 2.72  },
+    // ── Nissan ──
+    'xterra-auto':   { tire: 30.5, axle: 3.357, transFirst: 3.72, tcLow: 2.50  },
+    'xterra-mt':     { tire: 30.5, axle: 3.692, transFirst: 3.79, tcLow: 2.50  },
+    'frontier-auto': { tire: 30.6, axle: 3.357, transFirst: 3.72, tcLow: 2.50  },
+    'frontier-mt':   { tire: 30.6, axle: 3.692, transFirst: 3.79, tcLow: 2.50  },
+    // ── Suzuki ──
+    'samurai':       { tire: 27.0, axle: 3.727, transFirst: 3.52, tcLow: 1.94  },
 };
 
 const COMMON_GEAR_RATIOS = [3.07, 3.21, 3.45, 3.55, 3.73, 4.1, 4.11, 4.56, 4.88, 5.13, 5.38];
