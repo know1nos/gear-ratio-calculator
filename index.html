@@ -477,6 +477,23 @@
         </div>
     </div>
 
+    <!-- ── Per-gear crawl ── -->
+    <div id="crawl-section" class="hidden">
+        <div class="section-heading">Crawl Ratios by Gear</div>
+        <div class="calc-grid">
+            <div class="card">
+                <div class="card-title">Current <span class="card-sub" id="cur-crawl-label"></span></div>
+                <div id="cur-crawl-table"></div>
+                <button class="show-all-btn hidden" id="cur-show-all" data-open="0">▼ Show all gears</button>
+            </div>
+            <div class="card">
+                <div class="card-title">New <span class="card-sub" id="new-crawl-label"></span></div>
+                <div id="new-crawl-table"></div>
+                <button class="show-all-btn hidden" id="new-show-all" data-open="0">▼ Show all gears</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ── Available ratios ── -->
     <div id="available-section" class="hidden">
         <div class="section-heading">Available Ring &amp; Pinion Ratios</div>
@@ -541,21 +558,76 @@ const VEHICLES = {
     'samurai':       { tire: 27.0, axle: 3.727, transFirst: 3.52, tcLow: 1.94  },
 };
 
+// ─── Full gear arrays ─────────────────────────────────────────────────────────
+
+const GEARS = {
+    'AX-5':      [{g:'1st',r:3.93},{g:'2nd',r:2.33},{g:'3rd',r:1.44},{g:'4th',r:1.00},{g:'5th',r:0.85}],
+    'AX-15':     [{g:'1st',r:3.83},{g:'2nd',r:2.33},{g:'3rd',r:1.44},{g:'4th',r:1.00},{g:'5th',r:0.79}],
+    'NV3550':    [{g:'1st',r:4.01},{g:'2nd',r:2.33},{g:'3rd',r:1.39},{g:'4th',r:1.00},{g:'5th',r:0.78}],
+    'NSG370':    [{g:'1st',r:4.46},{g:'2nd',r:2.61},{g:'3rd',r:1.72},{g:'4th',r:1.25},{g:'5th',r:1.00},{g:'6th',r:0.84}],
+    'AisinAL6':  [{g:'1st',r:5.13},{g:'2nd',r:2.63},{g:'3rd',r:1.53},{g:'4th',r:1.00},{g:'5th',r:0.81},{g:'6th',r:0.72}],
+    '32RH':      [{g:'1st',r:2.74},{g:'2nd',r:1.54},{g:'3rd',r:1.00}],
+    '42RLE':     [{g:'1st',r:2.84},{g:'2nd',r:1.57},{g:'3rd',r:1.00},{g:'4th',r:0.69}],
+    'AW4':       [{g:'1st',r:2.80},{g:'2nd',r:1.53},{g:'3rd',r:1.00},{g:'4th',r:0.75}],
+    '8HP75':     [{g:'1st',r:4.71},{g:'2nd',r:3.13},{g:'3rd',r:2.10},{g:'4th',r:1.67},{g:'5th',r:1.28},{g:'6th',r:1.00},{g:'7th',r:0.84},{g:'8th',r:0.67}],
+    'A750F':     [{g:'1st',r:3.52},{g:'2nd',r:2.04},{g:'3rd',r:1.40},{g:'4th',r:1.00},{g:'5th',r:0.71}],
+    'A340F':     [{g:'1st',r:2.80},{g:'2nd',r:1.53},{g:'3rd',r:1.00},{g:'4th',r:0.75}],
+    'R151F':     [{g:'1st',r:3.93},{g:'2nd',r:2.33},{g:'3rd',r:1.44},{g:'4th',r:1.00},{g:'5th',r:0.85}],
+    'AB60F':     [{g:'1st',r:3.30},{g:'2nd',r:1.96},{g:'3rd',r:1.36},{g:'4th',r:1.00},{g:'5th',r:0.75},{g:'6th',r:0.64}],
+    '10R80':     [{g:'1st',r:4.70},{g:'2nd',r:2.99},{g:'3rd',r:2.15},{g:'4th',r:1.77},{g:'5th',r:1.52},{g:'6th',r:1.27},{g:'7th',r:1.00},{g:'8th',r:0.85},{g:'9th',r:0.69},{g:'10th',r:0.63}],
+    'Bronco7MT': [{g:'1st',r:4.70},{g:'2nd',r:2.99},{g:'3rd',r:2.15},{g:'4th',r:1.52},{g:'5th',r:1.27},{g:'6th',r:1.00},{g:'7th',r:0.79}],
+    '8L45':      [{g:'1st',r:4.56},{g:'2nd',r:2.97},{g:'3rd',r:2.08},{g:'4th',r:1.69},{g:'5th',r:1.27},{g:'6th',r:1.00},{g:'7th',r:0.85},{g:'8th',r:0.65}],
+    'RE5R05A':   [{g:'1st',r:3.72},{g:'2nd',r:2.06},{g:'3rd',r:1.41},{g:'4th',r:1.00},{g:'5th',r:0.83}],
+    'Nissan6MT': [{g:'1st',r:3.79},{g:'2nd',r:2.32},{g:'3rd',r:1.55},{g:'4th',r:1.16},{g:'5th',r:1.00},{g:'6th',r:0.79}],
+    'Samurai5MT':[{g:'1st',r:3.52},{g:'2nd',r:2.09},{g:'3rd',r:1.40},{g:'4th',r:1.00},{g:'5th',r:0.86}],
+};
+
+// add transKey to each vehicle so we can look up full gear arrays
+const VEHICLE_TRANS = {
+    'tj-4cyl': 'AX-5', 'tj-6cyl-sport': 'AX-15', 'tj-sahara': 'NV3550', 'tj-rubicon': 'NSG370',
+    'jk-sport': 'NSG370', 'jk-rubicon': 'NSG370',
+    'jl-sport': 'AisinAL6', 'jl-sahara': '8HP75', 'jl-rubicon': 'AisinAL6',
+    'xj-4cyl': 'AX-5', 'xj-6cyl': 'AX-15', 'xj-limited': 'AW4',
+    'yj-4cyl': 'AX-5', 'yj-6cyl': 'AX-15',
+    't4r-sr5-5th': 'A750F', 't4r-trdpro-5th': 'A750F', 't4r-4th': 'A340F',
+    'taco-v6-auto-2': 'A750F', 'taco-v6-mt-2': 'R151F', 'taco-v6-3rd': 'A750F', 'taco-trdpro-3rd': 'A750F',
+    'fjc-auto': 'A750F', 'fjc-mt': 'R151F', 'lc200': 'AB60F',
+    'bronco-base': 'Bronco7MT', 'bronco-sasquatch': 'Bronco7MT',
+    'raptor-gen2': '10R80', 'ranger-raptor': '10R80',
+    'colorado-zr2': '8L45',
+    'xterra-auto': 'RE5R05A', 'xterra-mt': 'Nissan6MT',
+    'frontier-auto': 'RE5R05A', 'frontier-mt': 'Nissan6MT',
+    'samurai': 'Samurai5MT',
+};
+
+// module-level gear arrays updated by vehicle picker
+var curGears = null;
+var newGears = null;
+
 const COMMON_GEAR_RATIOS = [3.07, 3.21, 3.45, 3.55, 3.73, 4.1, 4.11, 4.56, 4.88, 5.13, 5.38];
 
 // ─── Vehicle picker ───────────────────────────────────────────────────────────
 
 document.getElementById('vehicle-select').addEventListener('change', function() {
-    var v = VEHICLES[this.value];
+    var key = this.value;
+    var v = VEHICLES[key];
     if (!v) return;
-    // fill both sides with stock specs
+    var transKey = VEHICLE_TRANS[key] || null;
+    var gears = transKey ? GEARS[transKey] : null;
+    curGears = gears;
+    newGears = gears;
     ['cur', 'new'].forEach(function(p) {
         document.getElementById(p + '-tire').value = v.tire;
         document.getElementById(p + '-axle').value = v.axle;
         document.getElementById(p + '-trans').value = v.transFirst;
         document.getElementById(p + '-tc').value = v.tcLow;
         updateChips(p + '-axle-chips', v.axle);
+        // store trans name for label
+        document.getElementById(p + '-crawl-label').textContent = transKey ? '— ' + transKey : '';
     });
+    // reset show-all buttons
+    document.getElementById('cur-show-all').setAttribute('data-open', '0');
+    document.getElementById('new-show-all').setAttribute('data-open', '0');
     recalc();
 });
 
@@ -624,6 +696,36 @@ function renderRpmTable(containerId, axle, portal, tireDiam) {
 
 function setVisible(id, show) {
     document.getElementById(id).classList.toggle('hidden', !show);
+}
+
+function renderCrawlTable(tableId, btnId, gears, axle, portal, tcLow) {
+    var el = document.getElementById(tableId);
+    var btn = document.getElementById(btnId);
+    if (!gears || !tcLow) { el.innerHTML = ''; btn.classList.add('hidden'); return; }
+    var totalAxle = axle * portal;
+    var rows = gears.map(function(g) {
+        return {
+            gear: g.g, ratio: g.r,
+            hi: totalAxle * g.r * 1.0,   // 4Hi — TC high range is 1.0 on all supported TCs
+            lo: totalAxle * g.r * tcLow,
+        };
+    });
+    var open = btn.getAttribute('data-open') === '1';
+    var display = (open || rows.length <= 2) ? rows : [rows[0], rows[rows.length - 1]];
+    el.innerHTML = display.map(function(r) {
+        return '<div class="crawl-row">' +
+               '<span class="crawl-gear">' + r.gear + ' (' + r.ratio.toFixed(2) + ')</span>' +
+               '<span class="crawl-vals">' +
+               '<span class="crawl-hi">4Hi: ' + r.hi.toFixed(1) + ':1</span>' +
+               '<span class="crawl-lo">4Lo: ' + r.lo.toFixed(1) + ':1</span>' +
+               '</span></div>';
+    }).join('');
+    if (rows.length > 2) {
+        btn.classList.remove('hidden');
+        btn.textContent = open ? '▲ Hide gears' : '▼ Show all gears';
+    } else {
+        btn.classList.add('hidden');
+    }
 }
 
 // ─── State ────────────────────────────────────────────────────────────────────
@@ -698,6 +800,12 @@ function recalc() {
     if (cur.portalEn) document.getElementById('cur-total').textContent = curTotal.toFixed(2) + ':1';
     if (nw.portalEn)  document.getElementById('new-total').textContent = newTotal.toFixed(2) + ':1';
 
+    // Per-gear crawl table (only when vehicle picker has set gear arrays)
+    var hasCrawl = (curGears && cur.tcLow) || (newGears && nw.tcLow);
+    setVisible('crawl-section', !!hasCrawl);
+    renderCrawlTable('cur-crawl-table', 'cur-show-all', curGears, cur.axle, cur.portal, cur.tcLow);
+    renderCrawlTable('new-crawl-table', 'new-show-all', newGears, nw.axle, nw.portal, nw.tcLow);
+
     // RPM tables
     renderRpmTable('cur-rpm-table', cur.axle, cur.portal, cur.tire);
     renderRpmTable('new-rpm-table', nw.axle,  nw.portal,  nw.tire);
@@ -708,6 +816,15 @@ function recalc() {
     updateChips('cur-axle-chips', cur.axle);
     updateChips('new-axle-chips', nw.axle);
 }
+
+// ─── Show-all toggles ────────────────────────────────────────────────────────
+
+['cur-show-all','new-show-all'].forEach(function(id) {
+    document.getElementById(id).addEventListener('click', function() {
+        this.setAttribute('data-open', this.getAttribute('data-open') === '1' ? '0' : '1');
+        recalc();
+    });
+});
 
 // ─── Event listeners ──────────────────────────────────────────────────────────
 
