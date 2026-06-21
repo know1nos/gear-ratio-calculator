@@ -278,6 +278,7 @@
                 <option value="jl-sport">JL Sport (18+) — Aisin AL6, MP3022, 3.45, 31.5"</option>
                 <option value="jl-sahara">JL Sahara (18+) — 8HP75, MP3022, 3.45, 31.5"</option>
                 <option value="jl-rubicon">JL Rubicon (18+) — Aisin AL6, Rock-Trac, 4.10, 33"</option>
+                <option value="jl-rubicon-xr">JL Rubicon XR (21+) — 8HP75, Rock-Trac, 4.56, 35"</option>
             </optgroup>
             <optgroup label="XJ Cherokee">
                 <option value="xj-4cyl">XJ 4-cyl (91–01) — AX-5, NP231, 3.07, 29"</option>
@@ -342,24 +343,24 @@
 
             <div class="field">
                 <label>Tire Diameter (in)</label>
-                <input type="number" id="cur-tire" value="30" step="0.1" min="20" max="60">
+                <input type="number" id="cur-tire" value="35" step="0.1" min="20" max="60">
             </div>
 
             <div class="field">
                 <label>Axle Ratio</label>
-                <input type="number" id="cur-axle" value="3.07" step="0.01" min="1" max="10">
+                <input type="number" id="cur-axle" value="4.56" step="0.01" min="1" max="10">
                 <div class="ratio-chips" id="cur-axle-chips"></div>
             </div>
 
             <div class="field">
                 <label>Transmission — 1st Gear Ratio</label>
-                <input type="number" id="cur-trans" value="3.83" step="0.01" min="1" max="10">
-                <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
+                <input type="number" id="cur-trans" value="4.71" step="0.01" min="1" max="10">
+                <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 8HP75: 4.71 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
             </div>
 
             <div class="field">
                 <label>Transfer Case — Low Range</label>
-                <input type="number" id="cur-tc" value="2.72" step="0.01" min="1" max="6">
+                <input type="number" id="cur-tc" value="4.0" step="0.01" min="1" max="6">
                 <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61 · Toyota ADD: 2.566 · Nissan: 2.50 · Bronco Sasquatch: 3.06 · Raptor: 2.64 · Samurai: 1.94</p>
             </div>
 
@@ -382,35 +383,35 @@
 
             <div class="field">
                 <label>Tire Diameter (in)</label>
-                <input type="number" id="new-tire" value="30" step="0.1" min="20" max="60">
+                <input type="number" id="new-tire" value="39" step="0.1" min="20" max="60">
             </div>
 
             <div class="field">
                 <label>Axle Ratio</label>
-                <input type="number" id="new-axle" value="3.07" step="0.01" min="1" max="10">
+                <input type="number" id="new-axle" value="4.56" step="0.01" min="1" max="10">
                 <div class="ratio-chips" id="new-axle-chips"></div>
             </div>
 
             <div class="field">
                 <label>Transmission — 1st Gear Ratio</label>
-                <input type="number" id="new-trans" value="3.83" step="0.01" min="1" max="10">
-                <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
+                <input type="number" id="new-trans" value="4.71" step="0.01" min="1" max="10">
+                <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 8HP75: 4.71 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
             </div>
 
             <div class="field">
                 <label>Transfer Case — Low Range</label>
-                <input type="number" id="new-tc" value="2.72" step="0.01" min="1" max="6">
+                <input type="number" id="new-tc" value="4.0" step="0.01" min="1" max="6">
                 <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61 · Toyota ADD: 2.566 · Nissan: 2.50 · Bronco Sasquatch: 3.06 · Raptor: 2.64 · Samurai: 1.94</p>
             </div>
 
             <div class="portal-toggle">
                 <label class="toggle-label">
-                    <input type="checkbox" id="new-portal-en"> Portal Axles
+                    <input type="checkbox" id="new-portal-en" checked> Portal Axles
                 </label>
-                <div id="new-portal-field" class="hidden" style="margin-top:10px;">
+                <div id="new-portal-field" style="margin-top:10px;">
                     <div class="field" style="margin:0">
                         <label>Portal Ratio</label>
-                        <input type="number" id="new-portal" value="1.22" step="0.01" min="1" max="2">
+                        <input type="number" id="new-portal" value="1.11" step="0.01" min="1" max="2">
                     </div>
                     <p class="field-hint">Turn Offroad: 1.11 · 74 Weld / Portal Pros: 1.22 · Werewolf: ~1.35</p>
                 </div>
@@ -521,6 +522,7 @@ const VEHICLES = {
     'jl-sport':      { tire: 31.5, axle: 3.45,  transFirst: 5.13, tcLow: 2.72  },
     'jl-sahara':     { tire: 31.5, axle: 3.45,  transFirst: 4.71, tcLow: 2.72  },
     'jl-rubicon':    { tire: 33,   axle: 4.10,  transFirst: 5.13, tcLow: 4.0   },
+    'jl-rubicon-xr': { tire: 35,   axle: 4.56,  transFirst: 4.71, tcLow: 4.0   },
     // ── Jeep XJ ──
     'xj-4cyl':       { tire: 29,   axle: 3.07,  transFirst: 3.93, tcLow: 2.72  },
     'xj-6cyl':       { tire: 29,   axle: 3.55,  transFirst: 3.83, tcLow: 2.72  },
@@ -586,7 +588,7 @@ const GEARS = {
 const VEHICLE_TRANS = {
     'tj-4cyl': 'AX-5', 'tj-6cyl-sport': 'AX-15', 'tj-sahara': 'NV3550', 'tj-rubicon': 'NSG370',
     'jk-sport': 'NSG370', 'jk-rubicon': 'NSG370',
-    'jl-sport': 'AisinAL6', 'jl-sahara': '8HP75', 'jl-rubicon': 'AisinAL6',
+    'jl-sport': 'AisinAL6', 'jl-sahara': '8HP75', 'jl-rubicon': 'AisinAL6', 'jl-rubicon-xr': '8HP75',
     'xj-4cyl': 'AX-5', 'xj-6cyl': 'AX-15', 'xj-limited': 'AW4',
     'yj-4cyl': 'AX-5', 'yj-6cyl': 'AX-15',
     't4r-sr5-5th': 'A750F', 't4r-trdpro-5th': 'A750F', 't4r-4th': 'A340F',
@@ -601,8 +603,8 @@ const VEHICLE_TRANS = {
 };
 
 // module-level gear arrays updated by vehicle picker
-var curGears = null;
-var newGears = null;
+var curGears = GEARS['8HP75'];
+var newGears = GEARS['8HP75'];
 
 const COMMON_GEAR_RATIOS = [3.07, 3.21, 3.45, 3.55, 3.73, 4.1, 4.11, 4.56, 4.88, 5.13, 5.38];
 
