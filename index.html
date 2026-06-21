@@ -278,7 +278,7 @@
                 <option value="jl-sport">JL Sport (18+) — Aisin AL6, MP3022, 3.45, 31.5"</option>
                 <option value="jl-sahara">JL Sahara (18+) — 8HP75, MP3022, 3.45, 31.5"</option>
                 <option value="jl-rubicon">JL Rubicon (18+) — Aisin AL6, Rock-Trac, 4.10, 33"</option>
-                <option value="jl-rubicon-xr">JL Rubicon XR (21+) — 8HP75, Rock-Trac, 4.56, 35"</option>
+                <option value="jl-rubicon-xr" selected>JL Rubicon XR (21+) — 8HP75, Rock-Trac, 4.56, 35"</option>
             </optgroup>
             <optgroup label="XJ Cherokee">
                 <option value="xj-4cyl">XJ 4-cyl (91–01) — AX-5, NP231, 3.07, 29"</option>
@@ -836,6 +836,10 @@ function recalc() {
     if (el) { el.addEventListener('input', recalc); el.addEventListener('change', recalc); }
 });
 
+// initialize crawl labels for default vehicle
+['cur', 'new'].forEach(function(p) {
+    document.getElementById(p + '-crawl-label').textContent = '— 8HP75';
+});
 recalc();
 </script>
 </body>
