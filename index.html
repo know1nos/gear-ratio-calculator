@@ -773,9 +773,13 @@ function recalc() {
     // Regear alert
     var needsRegear = tiresChanged && newEff < curTotal * 0.9;
     var alertEl = document.getElementById('regear-alert');
+    var effDev = Math.abs(newEff / curTotal - 1) * 100;
     if (needsRegear) {
         alertEl.classList.remove('hidden');
         alertEl.innerHTML = 'Re-gearing to <strong>' + closest + '</strong> is recommended to restore stock power delivery with ' + nw.tire + '" tires.';
+    } else if (nw.portalEn && nw.tire > cur.tire && effDev < 5) {
+        alertEl.classList.remove('hidden');
+        alertEl.innerHTML = 'Effective ratio held within <strong>' + effDev.toFixed(1) + '%</strong> — portals preserve stock drivability at ' + nw.tire + '" with no re-gear.';
     } else {
         alertEl.classList.add('hidden');
     }
