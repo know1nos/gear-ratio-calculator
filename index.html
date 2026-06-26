@@ -76,17 +76,22 @@
         .vehicle-picker select {
             flex: 1;
             min-width: 220px;
-            background: #0a0a0a;
-            border: 1px solid var(--border);
+            background-color: #1c1c1c;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23bbb' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            border: 1px solid #383838;
             border-radius: 6px;
             color: var(--text);
             font-size: 0.87rem;
-            padding: 8px 10px;
+            padding: 8px 32px 8px 10px;
             outline: none;
             appearance: none;
             -webkit-appearance: none;
+            cursor: pointer;
         }
-        .vehicle-picker select:focus { border-color: #444; }
+        .vehicle-picker select:hover { border-color: #555; }
+        .vehicle-picker select:focus { border-color: var(--accent); }
         .vehicle-picker select option { background: #141414; }
         .vehicle-hint { font-size: 0.78rem; color: var(--text-muted); }
 
@@ -337,18 +342,23 @@
         /* ── Transmission / transfer-case quick-pick ── */
         .trans-select, .tc-select {
             width: 100%;
-            background: #0a0a0a;
-            border: 1px solid var(--border);
+            background-color: #1c1c1c;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23bbb' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 11px center;
+            border: 1px solid #383838;
             border-radius: 6px;
             color: var(--text);
             font-size: 0.82rem;
-            padding: 6px 9px;
+            padding: 7px 30px 7px 10px;
             margin-bottom: 6px;
             outline: none;
             appearance: none;
             -webkit-appearance: none;
+            cursor: pointer;
         }
-        .trans-select:focus, .tc-select:focus { border-color: #444; }
+        .trans-select:hover, .tc-select:hover { border-color: #555; }
+        .trans-select:focus, .tc-select:focus { border-color: var(--accent); }
         .trans-select option, .tc-select option { background: #141414; }
 
         /* ── Metric tire converter ── */
@@ -535,15 +545,15 @@
             </div>
 
             <div class="field">
-                <label>Transmission — 1st Gear Ratio <button type="button" class="info-btn" data-help="Your transmission's <b>1st-gear</b> reduction — the only gear that factors into crawl ratio. Manual 1st gears are usually deeper than automatics. Not sure? Pick your transmission from the dropdown and it fills this in.">i</button></label>
-                <select class="trans-select"><option value="">— not sure? pick your transmission —</option></select>
+                <label>Transmission — 1st Gear Ratio <button type="button" class="info-btn" data-help="Your transmission's <b>1st-gear</b> reduction — the only gear that factors into crawl ratio. Manual 1st gears are usually deeper than automatics. Tap 'not sure?' to pick your transmission from a list and it fills this in.">i</button><button type="button" class="mini-link" data-picker-toggle>not sure? ⌄</button></label>
+                <select class="trans-select hidden"><option value="">— pick your transmission —</option></select>
                 <input type="number" id="cur-trans" value="4.71" step="0.01" min="1" max="10">
                 <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 8HP75: 4.71 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
             </div>
 
             <div class="field">
-                <label>Transfer Case — Low Range <button type="button" class="info-btn" data-help="The extra reduction you get in <b>4-Lo</b> only — it's 1:1 in 2WD and 4-Hi, so it never changes your highway numbers. A Rubicon's Rock-Trac is a deep 4:1; most other cases are around 2.72:1. Not sure? Pick your transfer case from the dropdown.">i</button></label>
-                <select class="tc-select"><option value="">— not sure? pick your transfer case —</option></select>
+                <label>Transfer Case — Low Range <button type="button" class="info-btn" data-help="The extra reduction you get in <b>4-Lo</b> only — it's 1:1 in 2WD and 4-Hi, so it never changes your highway numbers. A Rubicon's Rock-Trac is a deep 4:1; most other cases are around 2.72:1. Tap 'not sure?' to pick your transfer case from a list.">i</button><button type="button" class="mini-link" data-picker-toggle>not sure? ⌄</button></label>
+                <select class="tc-select hidden"><option value="">— pick your transfer case —</option></select>
                 <input type="number" id="cur-tc" value="4.0" step="0.01" min="1" max="6">
                 <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61 · Toyota ADD: 2.566 · Nissan: 2.50 · Bronco Sasquatch: 3.06 · Raptor: 2.64 · Samurai: 1.94</p>
             </div>
@@ -586,15 +596,15 @@
             </div>
 
             <div class="field">
-                <label>Transmission — 1st Gear Ratio <button type="button" class="info-btn" data-help="Your transmission's <b>1st-gear</b> reduction — the only gear that factors into crawl ratio. Manual 1st gears are usually deeper than automatics. Not sure? Pick your transmission from the dropdown and it fills this in.">i</button></label>
-                <select class="trans-select"><option value="">— not sure? pick your transmission —</option></select>
+                <label>Transmission — 1st Gear Ratio <button type="button" class="info-btn" data-help="Your transmission's <b>1st-gear</b> reduction — the only gear that factors into crawl ratio. Manual 1st gears are usually deeper than automatics. Tap 'not sure?' to pick your transmission from a list and it fills this in.">i</button><button type="button" class="mini-link" data-picker-toggle>not sure? ⌄</button></label>
+                <select class="trans-select hidden"><option value="">— pick your transmission —</option></select>
                 <input type="number" id="new-trans" value="4.71" step="0.01" min="1" max="10">
                 <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 8HP75: 4.71 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
             </div>
 
             <div class="field">
-                <label>Transfer Case — Low Range <button type="button" class="info-btn" data-help="The extra reduction you get in <b>4-Lo</b> only — it's 1:1 in 2WD and 4-Hi, so it never changes your highway numbers. A Rubicon's Rock-Trac is a deep 4:1; most other cases are around 2.72:1. Not sure? Pick your transfer case from the dropdown.">i</button></label>
-                <select class="tc-select"><option value="">— not sure? pick your transfer case —</option></select>
+                <label>Transfer Case — Low Range <button type="button" class="info-btn" data-help="The extra reduction you get in <b>4-Lo</b> only — it's 1:1 in 2WD and 4-Hi, so it never changes your highway numbers. A Rubicon's Rock-Trac is a deep 4:1; most other cases are around 2.72:1. Tap 'not sure?' to pick your transfer case from a list.">i</button><button type="button" class="mini-link" data-picker-toggle>not sure? ⌄</button></label>
+                <select class="tc-select hidden"><option value="">— pick your transfer case —</option></select>
                 <input type="number" id="new-tc" value="4.0" step="0.01" min="1" max="6">
                 <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61 · Toyota ADD: 2.566 · Nissan: 2.50 · Bronco Sasquatch: 3.06 · Raptor: 2.64 · Samurai: 1.94</p>
             </div>
@@ -1172,6 +1182,16 @@ document.addEventListener('click', function(e) {
     if (!t) return;
     e.preventDefault();
     t.closest('.field').querySelector('.metric-row').classList.toggle('hidden');
+});
+
+// ─── "Not sure?" — reveal the transmission / transfer-case dropdown ───────────
+
+document.addEventListener('click', function(e) {
+    var t = e.target.closest('[data-picker-toggle]');
+    if (!t) return;
+    e.preventDefault();
+    var sel = t.closest('.field').querySelector('.trans-select, .tc-select');
+    if (sel) sel.classList.toggle('hidden');
 });
 
 document.querySelectorAll('.metric-row').forEach(function(row) {
