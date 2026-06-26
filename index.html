@@ -245,6 +245,94 @@
             margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
         }
 
+        /* ── Plain-English explainer ── */
+        .explainer {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 28px;
+            overflow: hidden;
+        }
+        .explainer summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 14px 20px;
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+        }
+        .explainer summary::-webkit-details-marker { display: none; }
+        .explainer summary::before {
+            content: '▸';
+            color: var(--text-muted);
+            transition: transform 0.15s;
+        }
+        .explainer[open] summary::before { transform: rotate(90deg); }
+        .explainer summary:hover { background: var(--bg-card-hover); }
+        .explainer-body {
+            padding: 4px 20px 20px;
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            border-top: 1px solid var(--border);
+        }
+        .explainer-body p { margin-bottom: 12px; }
+        .explainer-body strong { color: var(--text); }
+        .explainer-body .stack {
+            margin: 12px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        .explainer-body .stack li {
+            padding: 6px 0 6px 14px;
+            border-left: 2px solid rgba(204,85,0,0.3);
+            margin-bottom: 6px;
+        }
+        .explainer-body .stack b { color: var(--accent); font-weight: 700; }
+
+        /* ── Inline info toggles ── */
+        .info-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.62rem;
+            font-weight: 700;
+            width: 15px;
+            height: 15px;
+            line-height: 1;
+            border-radius: 50%;
+            padding: 0;
+            margin-left: 6px;
+            vertical-align: middle;
+            opacity: 0.7;
+            transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+        }
+        .info-btn:hover { opacity: 1; color: var(--accent); border-color: var(--accent); }
+        .info-btn.open { color: var(--accent); border-color: var(--accent); opacity: 1; }
+        .inline-help {
+            font-size: 0.74rem;
+            color: #9a9a9a;
+            line-height: 1.55;
+            background: rgba(204,85,0,0.06);
+            border-left: 2px solid rgba(204,85,0,0.35);
+            padding: 8px 11px;
+            margin: 8px 0 6px;
+            border-radius: 0 4px 4px 0;
+        }
+        .inline-help b { color: var(--text); font-weight: 600; }
+        .section-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin: -6px 0 14px;
+            line-height: 1.6;
+        }
+
         .hidden { display: none !important; }
     </style>
 </head>
@@ -258,6 +346,24 @@
 </header>
 
 <div class="container">
+
+    <!-- ── Plain-English explainer ── -->
+    <details class="explainer">
+        <summary>New to this? How gearing works — in plain English</summary>
+        <div class="explainer-body">
+            <p>Your engine's power gets multiplied on its way to the tires by a <strong>stack of gear reductions</strong>. Each one multiplies the one before it. More total reduction means more torque and slower, more controlled wheel speed for crawling over obstacles — at the cost of higher engine RPM on the highway.</p>
+            <p>There are <strong>three pieces of reduction</strong> on a normal rig (four if you run portals):</p>
+            <ul class="stack">
+                <li><b>Transmission (1st gear)</b> — the first multiplication. A manual's 1st gear is usually deeper than an auto's. Only 1st gear matters for your crawl ratio.</li>
+                <li><b>Transfer case (low range)</b> — the extra multiplication you get in <b>4-Lo</b> only. It's 1:1 in 2WD and 4-Hi (no reduction). A Rubicon's Rock-Trac is a deep 4:1; most others are around 2.72:1.</li>
+                <li><b>Axle ratio (your diffs)</b> — the ring &amp; pinion gears inside each axle, like 3.73 or 4.56. A bigger number is more reduction. <b>This is the part you "re-gear."</b></li>
+                <li><b>Portals (only if equipped)</b> — a final gear reduction right at the wheel hub. Adds reduction (and lift) without going to a bigger tire.</li>
+            </ul>
+            <p>Multiply all of them together in <strong>4-Lo, 1st gear</strong> and you get your <strong>crawl ratio</strong> — the single headline number for how slow and controlled you can creep. Roughly: ~40–50:1 is mild, 70:1 is good, 100:1+ is serious rock-crawling.</p>
+            <p><strong>Bigger tires work against all of this.</strong> A taller tire effectively undoes some of your gearing — the rig feels sluggish and your crawl ratio drops. Re-gearing the axles (or adding portals) brings the feel back.</p>
+            <p><strong>What this tool does:</strong> fill in your rig on the left, then on the right change only what you're upgrading — bigger tires, new axle gears, portals, a transfer-case swap. It shows the re-gear you'd need to restore your stock feel, and how your crawl ratio and highway RPM change. <em>Tap the ⓘ next to any field or result for a one-line explanation.</em></p>
+        </div>
+    </details>
 
     <!-- ── Vehicle picker ── -->
     <div class="vehicle-picker">
@@ -342,24 +448,24 @@
             <div class="card-title">Current Setup</div>
 
             <div class="field">
-                <label>Tire Diameter (in)</label>
+                <label>Tire Diameter (in) <button type="button" class="info-btn" data-help="Overall tire <b>height</b>, not the marketing size on the sidewall. Taller tires raise your effective gearing — they make the rig feel under-geared and slow it down until you re-gear the axles or add portals to compensate.">i</button></label>
                 <input type="number" id="cur-tire" value="35" step="0.1" min="20" max="60">
             </div>
 
             <div class="field">
-                <label>Axle Ratio</label>
+                <label>Axle Ratio <button type="button" class="info-btn" data-help="The <b>ring &amp; pinion</b> gears inside your differentials (like 4.56). A higher number gives more torque and a deeper crawl; a lower number gives lower highway RPM and better mpg. This is the part you change when you re-gear.">i</button></label>
                 <input type="number" id="cur-axle" value="4.56" step="0.01" min="1" max="10">
                 <div class="ratio-chips" id="cur-axle-chips"></div>
             </div>
 
             <div class="field">
-                <label>Transmission — 1st Gear Ratio</label>
+                <label>Transmission — 1st Gear Ratio <button type="button" class="info-btn" data-help="Your transmission's <b>1st-gear</b> reduction — the only gear that factors into crawl ratio. Manual 1st gears are usually deeper than automatics. Use the cheat-sheet below the box to find yours.">i</button></label>
                 <input type="number" id="cur-trans" value="4.71" step="0.01" min="1" max="10">
                 <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 8HP75: 4.71 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
             </div>
 
             <div class="field">
-                <label>Transfer Case — Low Range</label>
+                <label>Transfer Case — Low Range <button type="button" class="info-btn" data-help="The extra reduction you get in <b>4-Lo</b> only — it's 1:1 in 2WD and 4-Hi, so it never changes your highway numbers. A Rubicon's Rock-Trac is a deep 4:1; most other cases are around 2.72:1.">i</button></label>
                 <input type="number" id="cur-tc" value="4.0" step="0.01" min="1" max="6">
                 <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61 · Toyota ADD: 2.566 · Nissan: 2.50 · Bronco Sasquatch: 3.06 · Raptor: 2.64 · Samurai: 1.94</p>
             </div>
@@ -370,7 +476,7 @@
                 </label>
                 <div id="cur-portal-field" class="hidden" style="margin-top:10px;">
                     <div class="field" style="margin:0">
-                        <label>Portal Ratio</label>
+                        <label>Portal Ratio <button type="button" class="info-btn" data-help="Gear reduction right at the <b>wheel hub</b> on portal axles — it adds reduction and lift without going to a bigger tire. Common values: Turn Offroad 1.11, 74 Weld 1.22. Leave the box unchecked if you don't run portals.">i</button></label>
                         <input type="number" id="cur-portal" value="1.22" step="0.01" min="1" max="2">
                     </div>
                     <p class="field-hint">Turn Offroad: 1.11 · 74 Weld / Portal Pros: 1.22 · Werewolf: ~1.35</p>
@@ -382,24 +488,24 @@
             <div class="card-title">New / Planned <span class="card-sub">— change only what you're upgrading</span></div>
 
             <div class="field">
-                <label>Tire Diameter (in)</label>
+                <label>Tire Diameter (in) <button type="button" class="info-btn" data-help="Overall tire <b>height</b>, not the marketing size on the sidewall. Taller tires raise your effective gearing — they make the rig feel under-geared and slow it down until you re-gear the axles or add portals to compensate.">i</button></label>
                 <input type="number" id="new-tire" value="39" step="0.1" min="20" max="60">
             </div>
 
             <div class="field">
-                <label>Axle Ratio</label>
+                <label>Axle Ratio <button type="button" class="info-btn" data-help="The <b>ring &amp; pinion</b> gears inside your differentials (like 4.56). A higher number gives more torque and a deeper crawl; a lower number gives lower highway RPM and better mpg. This is the part you change when you re-gear.">i</button></label>
                 <input type="number" id="new-axle" value="4.56" step="0.01" min="1" max="10">
                 <div class="ratio-chips" id="new-axle-chips"></div>
             </div>
 
             <div class="field">
-                <label>Transmission — 1st Gear Ratio</label>
+                <label>Transmission — 1st Gear Ratio <button type="button" class="info-btn" data-help="Your transmission's <b>1st-gear</b> reduction — the only gear that factors into crawl ratio. Manual 1st gears are usually deeper than automatics. Use the cheat-sheet below the box to find yours.">i</button></label>
                 <input type="number" id="new-trans" value="4.71" step="0.01" min="1" max="10">
                 <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 8HP75: 4.71 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
             </div>
 
             <div class="field">
-                <label>Transfer Case — Low Range</label>
+                <label>Transfer Case — Low Range <button type="button" class="info-btn" data-help="The extra reduction you get in <b>4-Lo</b> only — it's 1:1 in 2WD and 4-Hi, so it never changes your highway numbers. A Rubicon's Rock-Trac is a deep 4:1; most other cases are around 2.72:1.">i</button></label>
                 <input type="number" id="new-tc" value="4.0" step="0.01" min="1" max="6">
                 <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61 · Toyota ADD: 2.566 · Nissan: 2.50 · Bronco Sasquatch: 3.06 · Raptor: 2.64 · Samurai: 1.94</p>
             </div>
@@ -410,7 +516,7 @@
                 </label>
                 <div id="new-portal-field" style="margin-top:10px;">
                     <div class="field" style="margin:0">
-                        <label>Portal Ratio</label>
+                        <label>Portal Ratio <button type="button" class="info-btn" data-help="Gear reduction right at the <b>wheel hub</b> on portal axles — it adds reduction and lift without going to a bigger tire. Common values: Turn Offroad 1.11, 74 Weld 1.22. Leave the box unchecked if you don't run portals.">i</button></label>
                         <input type="number" id="new-portal" value="1.11" step="0.01" min="1" max="2">
                     </div>
                     <p class="field-hint">Turn Offroad: 1.11 · 74 Weld / Portal Pros: 1.22 · Werewolf: ~1.35</p>
@@ -426,15 +532,15 @@
         <div class="card">
             <div class="card-title">Current Results</div>
             <div class="result-row">
-                <span class="result-label">Effective Ratio</span>
+                <span class="result-label">Effective Ratio <button type="button" class="info-btn" data-help="Your axle (times portal) adjusted for tire size — the apples-to-apples number for comparing how the <b>current</b> vs <b>new</b> setup will feel. If the new number drops well below the current one, the rig will feel sluggish and wants a re-gear.">i</button></span>
                 <span class="result-value" id="cur-effective">—</span>
             </div>
             <div class="result-row" id="cur-crawl-row">
-                <span class="result-label">Crawl Ratio (4Lo · 1st)</span>
+                <span class="result-label">Crawl Ratio (4Lo · 1st) <button type="button" class="info-btn" data-help="Everything multiplied together in <b>4-Lo, 1st gear</b> — the headline off-road number. Higher means slower, more controlled crawling. Roughly 40–50:1 mild, 70:1 good, 100:1+ serious rock-crawling.">i</button></span>
                 <span class="result-value" id="cur-crawl">—</span>
             </div>
             <div class="result-row" id="cur-total-row">
-                <span class="result-label">Total Drive Ratio (w/ portal)</span>
+                <span class="result-label">Total Drive Ratio (w/ portal) <button type="button" class="info-btn" data-help="Axle &times; portal — the combined final reduction at the wheel, before the transmission and transfer case multiply it further. Only shown when portals are enabled.">i</button></span>
                 <span class="result-value" id="cur-total">—</span>
             </div>
         </div>
@@ -442,23 +548,23 @@
         <div class="card">
             <div class="card-title">New Results</div>
             <div class="result-row">
-                <span class="result-label">Effective Ratio</span>
+                <span class="result-label">Effective Ratio <button type="button" class="info-btn" data-help="Your axle (times portal) adjusted for tire size — the apples-to-apples number for comparing how the <b>current</b> vs <b>new</b> setup will feel. If the new number drops well below the current one, the rig will feel sluggish and wants a re-gear.">i</button></span>
                 <span class="result-value" id="new-effective">—</span>
             </div>
             <div class="result-row" id="new-recommended-row">
-                <span class="result-label">Recommended Re-gear</span>
+                <span class="result-label">Recommended Re-gear <button type="button" class="info-btn" data-help="The axle ratio that would restore your <b>current</b> feel with the new tire size. Match this as closely as you can actually buy.">i</button></span>
                 <span class="result-value accent" id="new-recommended">—</span>
             </div>
             <div class="result-row" id="new-closest-row">
-                <span class="result-label">Closest Available</span>
+                <span class="result-label">Closest Available <button type="button" class="info-btn" data-help="The nearest ratio you can actually buy as a ring &amp; pinion set — highlighted in the Available Ring &amp; Pinion Ratios list further down.">i</button></span>
                 <span class="result-value" id="new-closest">—</span>
             </div>
             <div class="result-row" id="new-crawl-row">
-                <span class="result-label">Crawl Ratio (4Lo · 1st)</span>
+                <span class="result-label">Crawl Ratio (4Lo · 1st) <button type="button" class="info-btn" data-help="Everything multiplied together in <b>4-Lo, 1st gear</b> — the headline off-road number. Higher means slower, more controlled crawling. Roughly 40–50:1 mild, 70:1 good, 100:1+ serious rock-crawling.">i</button></span>
                 <span class="result-value" id="new-crawl">—</span>
             </div>
             <div class="result-row" id="new-total-row">
-                <span class="result-label">Total Drive Ratio (w/ portal)</span>
+                <span class="result-label">Total Drive Ratio (w/ portal) <button type="button" class="info-btn" data-help="Axle &times; portal — the combined final reduction at the wheel, before the transmission and transfer case multiply it further. Only shown when portals are enabled.">i</button></span>
                 <span class="result-value" id="new-total">—</span>
             </div>
             <div id="regear-alert" class="regear-alert hidden"></div>
@@ -467,6 +573,7 @@
 
     <!-- ── RPM ── -->
     <div class="section-heading">RPM at Speed</div>
+    <p class="section-sub">Approximate engine RPM at highway speeds for this axle, portal and tire combo (in a 1:1 direct-drive gear — an overdrive top gear will read lower). Lower is calmer and better on fuel; yellow and red flag RPMs that are getting high for cruising.</p>
     <div class="calc-grid">
         <div class="card">
             <div class="card-title">Current <span class="card-sub" id="cur-rpm-label"></span></div>
@@ -481,6 +588,7 @@
     <!-- ── Per-gear crawl ── -->
     <div id="crawl-section" class="hidden">
         <div class="section-heading">Crawl Ratios by Gear</div>
+        <p class="section-sub">Your crawl ratio in every gear, in both 4-Hi and 4-Lo. The deepest number — 1st gear in 4-Lo — is your headline crawl ratio.</p>
         <div class="calc-grid">
             <div class="card">
                 <div class="card-title">Current <span class="card-sub" id="cur-crawl-label"></span></div>
@@ -838,6 +946,28 @@ function recalc() {
  'new-tire','new-axle','new-trans','new-tc','new-portal'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) { el.addEventListener('input', recalc); el.addEventListener('change', recalc); }
+});
+
+// ─── Inline info toggles ──────────────────────────────────────────────────────
+
+document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.info-btn');
+    if (!btn) return;
+    e.preventDefault();
+    var open = btn.classList.toggle('open');
+    var container = btn.closest('.field, .result-row, .portal-toggle') || btn.parentElement;
+    var help = btn._helpNode;
+    if (open) {
+        if (!help) {
+            help = document.createElement('div');
+            help.className = 'inline-help';
+            help.innerHTML = btn.getAttribute('data-help') || '';
+            btn._helpNode = help;
+        }
+        container.parentNode.insertBefore(help, container.nextSibling);
+    } else if (help && help.parentNode) {
+        help.parentNode.removeChild(help);
+    }
 });
 
 // initialize crawl labels for default vehicle
