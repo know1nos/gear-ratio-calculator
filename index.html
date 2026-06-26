@@ -97,6 +97,7 @@
             gap: 10px;
             margin-bottom: 20px;
             font-size: 0.87rem;
+            flex-wrap: wrap;
         }
         .direction-bar .label-current { font-weight: 600; }
         .direction-bar .arrow { color: var(--text-muted); }
@@ -333,6 +334,71 @@
             line-height: 1.6;
         }
 
+        /* ── Transmission / transfer-case quick-pick ── */
+        .trans-select, .tc-select {
+            width: 100%;
+            background: #0a0a0a;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 0.82rem;
+            padding: 6px 9px;
+            margin-bottom: 6px;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        .trans-select:focus, .tc-select:focus { border-color: #444; }
+        .trans-select option, .tc-select option { background: #141414; }
+
+        /* ── Metric tire converter ── */
+        .mini-link {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.7rem;
+            margin-left: 8px;
+            padding: 0;
+            text-decoration: underline;
+        }
+        .mini-link:hover { color: var(--accent); }
+        .metric-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .metric-row input {
+            width: 62px;
+            background: #0a0a0a;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-size: 0.8rem;
+            padding: 5px 7px;
+            outline: none;
+        }
+        .metric-row input:focus { border-color: #444; }
+        .metric-row span { font-size: 0.78rem; color: var(--text-muted); }
+        .metric-out { color: var(--accent) !important; font-weight: 600; margin-left: 4px; }
+
+        /* ── Copy button ── */
+        .copy-btn {
+            background: none;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            cursor: pointer;
+            margin-left: auto;
+            transition: background 0.15s, color 0.15s;
+        }
+        .copy-btn:hover { background: var(--accent); color: #fff; }
+
         .hidden { display: none !important; }
     </style>
 </head>
@@ -439,6 +505,7 @@
         <span class="label-current">Current Setup</span>
         <span class="arrow">→</span>
         <span class="label-new">New / Planned</span>
+        <button type="button" class="copy-btn" id="copy-to-new">⧉ Copy Current → New</button>
     </div>
 
     <!-- ── Inputs ── -->
@@ -448,8 +515,17 @@
             <div class="card-title">Current Setup</div>
 
             <div class="field">
-                <label>Tire Diameter (in) <button type="button" class="info-btn" data-help="Overall tire <b>height</b>, not the marketing size on the sidewall. Taller tires raise your effective gearing — they make the rig feel under-geared and slow it down until you re-gear the axles or add portals to compensate.">i</button></label>
+                <label>Tire Diameter (in) <button type="button" class="info-btn" data-help="Overall tire <b>height</b>, not the marketing size on the sidewall. Taller tires raise your effective gearing — they make the rig feel under-geared and slow it down until you re-gear the axles or add portals to compensate.">i</button><button type="button" class="mini-link" data-metric-toggle>metric ⌄</button></label>
                 <input type="number" id="cur-tire" value="35" step="0.1" min="20" max="60">
+                <div class="metric-row hidden">
+                    <input type="number" class="metric-w" placeholder="width" min="100" max="500">
+                    <span>mm /</span>
+                    <input type="number" class="metric-a" placeholder="aspect" min="20" max="100">
+                    <span>R</span>
+                    <input type="number" class="metric-r" placeholder="wheel" min="10" max="30">
+                    <span>in</span>
+                    <span class="metric-out"></span>
+                </div>
             </div>
 
             <div class="field">
@@ -459,13 +535,15 @@
             </div>
 
             <div class="field">
-                <label>Transmission — 1st Gear Ratio <button type="button" class="info-btn" data-help="Your transmission's <b>1st-gear</b> reduction — the only gear that factors into crawl ratio. Manual 1st gears are usually deeper than automatics. Use the cheat-sheet below the box to find yours.">i</button></label>
+                <label>Transmission — 1st Gear Ratio <button type="button" class="info-btn" data-help="Your transmission's <b>1st-gear</b> reduction — the only gear that factors into crawl ratio. Manual 1st gears are usually deeper than automatics. Not sure? Pick your transmission from the dropdown and it fills this in.">i</button></label>
+                <select class="trans-select"><option value="">— not sure? pick your transmission —</option></select>
                 <input type="number" id="cur-trans" value="4.71" step="0.01" min="1" max="10">
                 <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 8HP75: 4.71 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
             </div>
 
             <div class="field">
-                <label>Transfer Case — Low Range <button type="button" class="info-btn" data-help="The extra reduction you get in <b>4-Lo</b> only — it's 1:1 in 2WD and 4-Hi, so it never changes your highway numbers. A Rubicon's Rock-Trac is a deep 4:1; most other cases are around 2.72:1.">i</button></label>
+                <label>Transfer Case — Low Range <button type="button" class="info-btn" data-help="The extra reduction you get in <b>4-Lo</b> only — it's 1:1 in 2WD and 4-Hi, so it never changes your highway numbers. A Rubicon's Rock-Trac is a deep 4:1; most other cases are around 2.72:1. Not sure? Pick your transfer case from the dropdown.">i</button></label>
+                <select class="tc-select"><option value="">— not sure? pick your transfer case —</option></select>
                 <input type="number" id="cur-tc" value="4.0" step="0.01" min="1" max="6">
                 <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61 · Toyota ADD: 2.566 · Nissan: 2.50 · Bronco Sasquatch: 3.06 · Raptor: 2.64 · Samurai: 1.94</p>
             </div>
@@ -488,8 +566,17 @@
             <div class="card-title">New / Planned <span class="card-sub">— change only what you're upgrading</span></div>
 
             <div class="field">
-                <label>Tire Diameter (in) <button type="button" class="info-btn" data-help="Overall tire <b>height</b>, not the marketing size on the sidewall. Taller tires raise your effective gearing — they make the rig feel under-geared and slow it down until you re-gear the axles or add portals to compensate.">i</button></label>
+                <label>Tire Diameter (in) <button type="button" class="info-btn" data-help="Overall tire <b>height</b>, not the marketing size on the sidewall. Taller tires raise your effective gearing — they make the rig feel under-geared and slow it down until you re-gear the axles or add portals to compensate.">i</button><button type="button" class="mini-link" data-metric-toggle>metric ⌄</button></label>
                 <input type="number" id="new-tire" value="39" step="0.1" min="20" max="60">
+                <div class="metric-row hidden">
+                    <input type="number" class="metric-w" placeholder="width" min="100" max="500">
+                    <span>mm /</span>
+                    <input type="number" class="metric-a" placeholder="aspect" min="20" max="100">
+                    <span>R</span>
+                    <input type="number" class="metric-r" placeholder="wheel" min="10" max="30">
+                    <span>in</span>
+                    <span class="metric-out"></span>
+                </div>
             </div>
 
             <div class="field">
@@ -499,13 +586,15 @@
             </div>
 
             <div class="field">
-                <label>Transmission — 1st Gear Ratio <button type="button" class="info-btn" data-help="Your transmission's <b>1st-gear</b> reduction — the only gear that factors into crawl ratio. Manual 1st gears are usually deeper than automatics. Use the cheat-sheet below the box to find yours.">i</button></label>
+                <label>Transmission — 1st Gear Ratio <button type="button" class="info-btn" data-help="Your transmission's <b>1st-gear</b> reduction — the only gear that factors into crawl ratio. Manual 1st gears are usually deeper than automatics. Not sure? Pick your transmission from the dropdown and it fills this in.">i</button></label>
+                <select class="trans-select"><option value="">— not sure? pick your transmission —</option></select>
                 <input type="number" id="new-trans" value="4.71" step="0.01" min="1" max="10">
                 <p class="field-hint">AX-5: 3.93 · AX-15: 3.83 · NV3550: 4.01 · NSG370: 4.46 · Aisin AL6: 5.13 · 8HP75: 4.71 · 42RLE: 2.84 · 32RH: 2.74 · AW4: 2.80 · Toyota A750F: 3.52 · Toyota R151F: 3.93 · Ford 10R80/7MT: 4.70</p>
             </div>
 
             <div class="field">
-                <label>Transfer Case — Low Range <button type="button" class="info-btn" data-help="The extra reduction you get in <b>4-Lo</b> only — it's 1:1 in 2WD and 4-Hi, so it never changes your highway numbers. A Rubicon's Rock-Trac is a deep 4:1; most other cases are around 2.72:1.">i</button></label>
+                <label>Transfer Case — Low Range <button type="button" class="info-btn" data-help="The extra reduction you get in <b>4-Lo</b> only — it's 1:1 in 2WD and 4-Hi, so it never changes your highway numbers. A Rubicon's Rock-Trac is a deep 4:1; most other cases are around 2.72:1. Not sure? Pick your transfer case from the dropdown.">i</button></label>
+                <select class="tc-select"><option value="">— not sure? pick your transfer case —</option></select>
                 <input type="number" id="new-tc" value="4.0" step="0.01" min="1" max="6">
                 <p class="field-hint">NP231 / NV241J / MP3022: 2.72 · Rock-Trac (NV241OR): 4.0 · NP207: 2.61 · Toyota ADD: 2.566 · Nissan: 2.50 · Bronco Sasquatch: 3.06 · Raptor: 2.64 · Samurai: 1.94</p>
             </div>
@@ -735,9 +824,10 @@ document.getElementById('vehicle-select').addEventListener('change', function() 
         // store trans name for label
         document.getElementById(p + '-crawl-label').textContent = transKey ? '— ' + transKey : '';
     });
-    // reset show-all buttons
+    // reset show-all buttons + sync helper dropdowns to the picked vehicle
     document.getElementById('cur-show-all').setAttribute('data-open', '0');
     document.getElementById('new-show-all').setAttribute('data-open', '0');
+    applyHelperSelections(key);
     recalc();
 });
 
@@ -746,10 +836,10 @@ document.getElementById('vehicle-select').addEventListener('change', function() 
 function buildChips(containerId, inputId) {
     var container = document.getElementById(containerId);
     var input = document.getElementById(inputId);
-    [3.07, 3.21, 3.45, 3.73, 4.10, 4.56, 4.88].forEach(function(r) {
+    COMMON_GEAR_RATIOS.forEach(function(r) {
         var btn = document.createElement('button');
         btn.className = 'ratio-chip';
-        btn.textContent = r;
+        btn.textContent = fmtRatio(r);
         btn.type = 'button';
         btn.addEventListener('click', function() {
             input.value = r;
@@ -787,6 +877,13 @@ function findClosest(target) {
     return COMMON_GEAR_RATIOS.reduce(function(p, c) {
         return Math.abs(c - target) < Math.abs(p - target) ? c : p;
     });
+}
+
+// Display ratios with a consistent 2 decimals (4.1 -> 4.10), but keep a real
+// 3rd digit when one exists (3.909 stays 3.909) rather than rounding it away.
+function fmtRatio(n) {
+    var two = n.toFixed(2);
+    return parseFloat(two) === n ? two : n.toFixed(3);
 }
 
 function rpmClass(rpm) {
@@ -875,7 +972,7 @@ function recalc() {
     setVisible('new-closest-row', tiresChanged);
     if (tiresChanged) {
         document.getElementById('new-recommended').textContent = newRec.toFixed(2) + ':1';
-        document.getElementById('new-closest').textContent = closest + ':1';
+        document.getElementById('new-closest').textContent = fmtRatio(closest) + ':1';
     }
 
     // Regear alert
@@ -884,7 +981,7 @@ function recalc() {
     var effDev = Math.abs(newEff / curTotal - 1) * 100;
     if (needsRegear) {
         alertEl.classList.remove('hidden');
-        alertEl.innerHTML = 'Re-gearing to <strong>' + closest + '</strong> is recommended to restore stock power delivery with ' + nw.tire + '" tires.';
+        alertEl.innerHTML = 'Re-gearing to <strong>' + fmtRatio(closest) + '</strong> is recommended to restore stock power delivery with ' + nw.tire + '" tires.';
     } else if (nw.portalEn && nw.tire > cur.tire && effDev < 5) {
         alertEl.classList.remove('hidden');
         alertEl.innerHTML = 'Effective ratio held within <strong>' + effDev.toFixed(1) + '%</strong> — portals preserve stock drivability at ' + nw.tire + '" with no re-gear.';
@@ -896,7 +993,7 @@ function recalc() {
     setVisible('available-section', tiresChanged);
     if (tiresChanged) {
         document.getElementById('available-badges').innerHTML = COMMON_GEAR_RATIOS.map(function(r) {
-            return '<span class="ratio-badge' + (r === closest ? ' best' : '') + '">' + r + '</span>';
+            return '<span class="ratio-badge' + (r === closest ? ' best' : '') + '">' + fmtRatio(r) + '</span>';
         }).join('');
     }
 
@@ -923,8 +1020,8 @@ function recalc() {
     // RPM tables
     renderRpmTable('cur-rpm-table', cur.axle, cur.portal, cur.tire);
     renderRpmTable('new-rpm-table', nw.axle,  nw.portal,  nw.tire);
-    document.getElementById('cur-rpm-label').textContent = '— ' + cur.axle + (cur.portalEn ? ' × ' + cur.portal + ' portal' : '') + ', ' + cur.tire + '" tires';
-    document.getElementById('new-rpm-label').textContent = '— ' + nw.axle  + (nw.portalEn  ? ' × ' + nw.portal  + ' portal' : '') + ', ' + nw.tire  + '" tires';
+    document.getElementById('cur-rpm-label').textContent = '— ' + fmtRatio(cur.axle) + (cur.portalEn ? ' × ' + fmtRatio(cur.portal) + ' portal' : '') + ', ' + cur.tire + '" tires';
+    document.getElementById('new-rpm-label').textContent = '— ' + fmtRatio(nw.axle)  + (nw.portalEn  ? ' × ' + fmtRatio(nw.portal)  + ' portal' : '') + ', ' + nw.tire  + '" tires';
 
     // Chip sync
     updateChips('cur-axle-chips', cur.axle);
@@ -945,7 +1042,11 @@ function recalc() {
 ['cur-tire','cur-axle','cur-trans','cur-tc','cur-portal',
  'new-tire','new-axle','new-trans','new-tc','new-portal'].forEach(function(id) {
     var el = document.getElementById(id);
-    if (el) { el.addEventListener('input', recalc); el.addEventListener('change', recalc); }
+    if (el) {
+        el.addEventListener('input', recalc);
+        el.addEventListener('change', recalc);
+        el.addEventListener('focus', function() { this.select(); });
+    }
 });
 
 // ─── Inline info toggles ──────────────────────────────────────────────────────
@@ -970,10 +1071,132 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// initialize crawl labels for default vehicle
+// ─── Transmission quick-pick (fills 1st gear) ────────────────────────────────
+
+const TRANS_LABELS = {
+    'AX-5': 'AX-5 (5-spd manual)', 'AX-15': 'AX-15 (5-spd manual)', 'NV3550': 'NV3550 (5-spd manual)',
+    'NSG370': 'NSG370 (6-spd manual)', 'AisinAL6': 'Aisin AL6 (6-spd auto)', '32RH': '32RH (3-spd auto)',
+    '42RLE': '42RLE (4-spd auto)', 'AW4': 'AW4 (4-spd auto)', '8HP75': 'ZF 8HP75 (8-spd auto)',
+    'A750F': 'Toyota A750F (5-spd auto)', 'A340F': 'Toyota A340F (4-spd auto)', 'R151F': 'Toyota R151F (5-spd manual)',
+    'AB60F': 'Toyota AB60F (6-spd auto)', '10R80': 'Ford 10R80 (10-spd auto)', 'Bronco7MT': 'Bronco 7MT (7-spd manual)',
+    '8L45': 'GM 8L45 (8-spd auto)', 'RE5R05A': 'Nissan RE5R05A (5-spd auto)', 'Nissan6MT': 'Nissan 6MT (6-spd manual)',
+    'Samurai5MT': 'Suzuki Samurai (5-spd manual)',
+};
+
+document.querySelectorAll('.trans-select').forEach(function(sel) {
+    Object.keys(GEARS).forEach(function(key) {
+        var o = document.createElement('option');
+        o.value = key;
+        o.textContent = (TRANS_LABELS[key] || key) + ' — 1st: ' + GEARS[key][0].r.toFixed(2);
+        sel.appendChild(o);
+    });
+    sel.addEventListener('change', function() {
+        var key = this.value;
+        if (!key) return;
+        var field = this.closest('.field');
+        var input = field.querySelector(':scope > input[type="number"]');
+        var isCur = input.id.indexOf('cur') === 0;
+        input.value = GEARS[key][0].r;
+        if (isCur) { curGears = GEARS[key]; } else { newGears = GEARS[key]; }
+        document.getElementById((isCur ? 'cur' : 'new') + '-crawl-label').textContent = '— ' + key;
+        recalc();
+    });
+});
+
+// ─── Transfer-case quick-pick (fills low range) ──────────────────────────────
+
+const TRANSFER_CASES = {
+    'std272':    { label: 'NP231 / NV241J / MP3022 — Command-Trac (2.72)', ratio: 2.72 },
+    'rocktrac':  { label: 'NV241OR Rock-Trac (4.0)', ratio: 4.0 },
+    'np207':     { label: 'NP207 (2.61)', ratio: 2.61 },
+    'toyota':    { label: 'Toyota (2.566)', ratio: 2.566 },
+    'nissan':    { label: 'Nissan (2.50)', ratio: 2.50 },
+    'raptor':    { label: 'Ford Raptor (2.64)', ratio: 2.64 },
+    'sasquatch': { label: 'Bronco Sasquatch (3.06)', ratio: 3.06 },
+    'samurai':   { label: 'Suzuki Samurai (1.94)', ratio: 1.94 },
+};
+
+document.querySelectorAll('.tc-select').forEach(function(sel) {
+    Object.keys(TRANSFER_CASES).forEach(function(key) {
+        var o = document.createElement('option');
+        o.value = key;
+        o.textContent = TRANSFER_CASES[key].label;
+        sel.appendChild(o);
+    });
+    sel.addEventListener('change', function() {
+        var key = this.value;
+        if (!key) return;
+        var input = this.closest('.field').querySelector(':scope > input[type="number"]');
+        input.value = TRANSFER_CASES[key].ratio;
+        recalc();
+    });
+});
+
+function findTCByRatio(ratio) {
+    var keys = Object.keys(TRANSFER_CASES);
+    for (var i = 0; i < keys.length; i++) {
+        if (Math.abs(TRANSFER_CASES[keys[i]].ratio - ratio) < 0.005) return keys[i];
+    }
+    return '';
+}
+
+// set both helper dropdowns to match a vehicle preset
+function applyHelperSelections(key) {
+    var transKey = VEHICLE_TRANS[key] || '';
+    var tcKey = VEHICLES[key] ? findTCByRatio(VEHICLES[key].tcLow) : '';
+    document.querySelectorAll('.trans-select').forEach(function(s) { s.value = transKey; });
+    document.querySelectorAll('.tc-select').forEach(function(s) { s.value = tcKey; });
+}
+
+// ─── Copy Current → New ──────────────────────────────────────────────────────
+
+document.getElementById('copy-to-new').addEventListener('click', function() {
+    ['tire', 'axle', 'trans', 'tc'].forEach(function(f) {
+        document.getElementById('new-' + f).value = document.getElementById('cur-' + f).value;
+    });
+    var curPortalEn = document.getElementById('cur-portal-en').checked;
+    document.getElementById('new-portal-en').checked = curPortalEn;
+    document.getElementById('new-portal-field').classList.toggle('hidden', !curPortalEn);
+    document.getElementById('new-portal').value = document.getElementById('cur-portal').value;
+    newGears = curGears;
+    document.getElementById('new-crawl-label').textContent =
+        document.getElementById('cur-crawl-label').textContent;
+    updateChips('new-axle-chips', document.getElementById('new-axle').value);
+    recalc();
+});
+
+// ─── Metric tire converter ───────────────────────────────────────────────────
+
+document.addEventListener('click', function(e) {
+    var t = e.target.closest('[data-metric-toggle]');
+    if (!t) return;
+    e.preventDefault();
+    t.closest('.field').querySelector('.metric-row').classList.toggle('hidden');
+});
+
+document.querySelectorAll('.metric-row').forEach(function(row) {
+    row.addEventListener('input', function() {
+        var w = parseFloat(row.querySelector('.metric-w').value);
+        var a = parseFloat(row.querySelector('.metric-a').value);
+        var r = parseFloat(row.querySelector('.metric-r').value);
+        var out = row.querySelector('.metric-out');
+        if (!w || !a || !r) { out.textContent = ''; return; }
+        var dia = Math.round((r + 2 * (w * a / 100) / 25.4) * 10) / 10;
+        out.textContent = '= ' + dia + '″';
+        var tireInput = row.closest('.field').querySelector(':scope > input[type="number"]');
+        tireInput.value = dia;
+        recalc();
+    });
+});
+
+// initialize crawl labels + helper dropdowns for the default vehicle
 ['cur', 'new'].forEach(function(p) {
     document.getElementById(p + '-crawl-label').textContent = '— 8HP75';
 });
+(function initHelpers() {
+    var vk = document.getElementById('vehicle-select').value;
+    if (vk && VEHICLES[vk]) applyHelperSelections(vk);
+})();
 recalc();
 </script>
 </body>
