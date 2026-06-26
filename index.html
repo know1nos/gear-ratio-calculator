@@ -114,11 +114,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
-        @media (max-width: 720px) {
-            .calc-grid { grid-template-columns: 1fr; }
-            .copy-desktop { display: none; }
-            .copy-mobile { display: block; }
-        }
+        @media (max-width: 720px) { .calc-grid { grid-template-columns: 1fr; } }
 
         /* ── Cards ── */
         .card {
@@ -414,6 +410,10 @@
         .copy-btn:hover { background: var(--accent); color: #fff; }
         .copy-btn-block { display: block; width: 100%; margin: 18px 0 0; }
         .copy-mobile { display: none; }
+        @media (max-width: 720px) {
+            .copy-desktop { display: none; }
+            .copy-mobile { display: block; }
+        }
 
         .hidden { display: none !important; }
     </style>
