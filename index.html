@@ -114,7 +114,11 @@
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
-        @media (max-width: 720px) { .calc-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 720px) {
+            .calc-grid { grid-template-columns: 1fr; }
+            .copy-desktop { display: none; }
+            .copy-mobile { display: block; }
+        }
 
         /* ── Cards ── */
         .card {
@@ -408,6 +412,8 @@
             transition: background 0.15s, color 0.15s;
         }
         .copy-btn:hover { background: var(--accent); color: #fff; }
+        .copy-btn-block { display: block; width: 100%; margin: 18px 0 0; }
+        .copy-mobile { display: none; }
 
         .hidden { display: none !important; }
     </style>
@@ -453,14 +459,21 @@
                 <option value="tj-rubicon">TJ Rubicon (03–06) — NSG370, Rock-Trac, 4.10, 30"</option>
             </optgroup>
             <optgroup label="JK Wrangler">
-                <option value="jk-sport">JK Sport (07–18) — NSG370, NV241J, 3.21, 30"</option>
-                <option value="jk-rubicon">JK Rubicon (07–18) — NSG370, Rock-Trac, 4.10, 32"</option>
+                <option value="jk-sport">JK Sport — 6-spd manual (07–18) — NSG370, NV241J, 3.21, 30"</option>
+                <option value="jk-sport-auto4">JK Sport — 4-spd auto (07–11) — 42RLE, NV241J, 3.21, 30"</option>
+                <option value="jk-sport-auto5">JK Sport — 5-spd auto (12–18) — W5A580, NV241J, 3.21, 30"</option>
+                <option value="jk-rubicon">JK Rubicon — 6-spd manual (07–18) — NSG370, Rock-Trac, 4.10, 32"</option>
+                <option value="jk-rubicon-auto4">JK Rubicon — 4-spd auto (07–11) — 42RLE, Rock-Trac, 4.10, 32"</option>
+                <option value="jk-rubicon-auto5">JK Rubicon — 5-spd auto (12–18) — W5A580, Rock-Trac, 4.10, 32"</option>
             </optgroup>
             <optgroup label="JL Wrangler">
-                <option value="jl-sport">JL Sport (18+) — Aisin AL6, MP3022, 3.45, 31.5"</option>
-                <option value="jl-sahara">JL Sahara (18+) — 8HP75, MP3022, 3.45, 31.5"</option>
-                <option value="jl-rubicon">JL Rubicon (18+) — Aisin AL6, Rock-Trac, 4.10, 33"</option>
-                <option value="jl-rubicon-xr" selected>JL Rubicon XR (21+) — 8HP75, Rock-Trac, 4.56, 35"</option>
+                <option value="jl-sport">JL Sport — 6-spd manual D478 (18+) — MP3022, 3.45, 31.5"</option>
+                <option value="jl-sport-auto">JL Sport — 8-spd auto 850RE (18+) — MP3022, 3.45, 31.5"</option>
+                <option value="jl-sahara">JL Sahara — 8-spd auto 850RE (18+) — MP3022, 3.45, 31.5"</option>
+                <option value="jl-rubicon">JL Rubicon — 6-spd manual D478 (18+) — Rock-Trac, 4.10, 33"</option>
+                <option value="jl-rubicon-auto">JL Rubicon — 8-spd auto 850RE (18+) — Rock-Trac, 4.10, 33"</option>
+                <option value="jl-rubicon-xr" selected>JL Rubicon XR — 8-spd auto 850RE (21+) — Rock-Trac, 4.56, 35"</option>
+                <option value="jl-rubicon-xr-mt">JL Rubicon XR — 6-spd manual D478 (21+) — Rock-Trac, 4.56, 35"</option>
             </optgroup>
             <optgroup label="XJ Cherokee">
                 <option value="xj-4cyl">XJ 4-cyl (91–01) — AX-5, NP231, 3.07, 29"</option>
@@ -515,7 +528,7 @@
         <span class="label-current">Current Setup</span>
         <span class="arrow">→</span>
         <span class="label-new">New / Planned</span>
-        <button type="button" class="copy-btn" id="copy-to-new">⧉ Copy Current → New</button>
+        <button type="button" class="copy-btn copy-to-new copy-desktop">⧉ Copy Current → New</button>
     </div>
 
     <!-- ── Inputs ── -->
@@ -570,6 +583,8 @@
                     <p class="field-hint">Turn Offroad: 1.11 · 74 Weld / Portal Pros: 1.22 · Werewolf: ~1.35</p>
                 </div>
             </div>
+
+            <button type="button" class="copy-btn copy-btn-block copy-to-new copy-mobile">⧉ Copy these to New / Planned →</button>
         </div>
 
         <div class="card">
@@ -723,13 +738,20 @@ const VEHICLES = {
     'tj-sahara':     { tire: 30,   axle: 3.73,  transFirst: 4.01, tcLow: 2.72  },
     'tj-rubicon':    { tire: 30,   axle: 4.10,  transFirst: 4.46, tcLow: 4.0   },
     // ── Jeep JK ──
-    'jk-sport':      { tire: 30,   axle: 3.21,  transFirst: 4.46, tcLow: 2.72  },
-    'jk-rubicon':    { tire: 32,   axle: 4.10,  transFirst: 4.46, tcLow: 4.0   },
+    'jk-sport':         { tire: 30,   axle: 3.21,  transFirst: 4.46, tcLow: 2.72  },
+    'jk-sport-auto4':   { tire: 30,   axle: 3.21,  transFirst: 2.84, tcLow: 2.72  },
+    'jk-sport-auto5':   { tire: 30,   axle: 3.21,  transFirst: 3.59, tcLow: 2.72  },
+    'jk-rubicon':       { tire: 32,   axle: 4.10,  transFirst: 4.46, tcLow: 4.0   },
+    'jk-rubicon-auto4': { tire: 32,   axle: 4.10,  transFirst: 2.84, tcLow: 4.0   },
+    'jk-rubicon-auto5': { tire: 32,   axle: 4.10,  transFirst: 3.59, tcLow: 4.0   },
     // ── Jeep JL ──
-    'jl-sport':      { tire: 31.5, axle: 3.45,  transFirst: 5.13, tcLow: 2.72  },
-    'jl-sahara':     { tire: 31.5, axle: 3.45,  transFirst: 4.71, tcLow: 2.72  },
-    'jl-rubicon':    { tire: 33,   axle: 4.10,  transFirst: 5.13, tcLow: 4.0   },
-    'jl-rubicon-xr': { tire: 35,   axle: 4.56,  transFirst: 4.71, tcLow: 4.0   },
+    'jl-sport':         { tire: 31.5, axle: 3.45, transFirst: 5.13, tcLow: 2.72 },
+    'jl-sport-auto':    { tire: 31.5, axle: 3.45, transFirst: 4.71, tcLow: 2.72 },
+    'jl-sahara':        { tire: 31.5, axle: 3.45, transFirst: 4.71, tcLow: 2.72 },
+    'jl-rubicon':       { tire: 33,   axle: 4.10, transFirst: 5.13, tcLow: 4.0  },
+    'jl-rubicon-auto':  { tire: 33,   axle: 4.10, transFirst: 4.71, tcLow: 4.0  },
+    'jl-rubicon-xr':    { tire: 35,   axle: 4.56, transFirst: 4.71, tcLow: 4.0  },
+    'jl-rubicon-xr-mt': { tire: 35,   axle: 4.56, transFirst: 5.13, tcLow: 4.0  },
     // ── Jeep XJ ──
     'xj-4cyl':       { tire: 29,   axle: 3.07,  transFirst: 3.93, tcLow: 2.72  },
     'xj-6cyl':       { tire: 29,   axle: 3.55,  transFirst: 3.83, tcLow: 2.72  },
@@ -774,9 +796,10 @@ const GEARS = {
     'AX-15':     [{g:'1st',r:3.83},{g:'2nd',r:2.33},{g:'3rd',r:1.44},{g:'4th',r:1.00},{g:'5th',r:0.79}],
     'NV3550':    [{g:'1st',r:4.01},{g:'2nd',r:2.33},{g:'3rd',r:1.39},{g:'4th',r:1.00},{g:'5th',r:0.78}],
     'NSG370':    [{g:'1st',r:4.46},{g:'2nd',r:2.61},{g:'3rd',r:1.72},{g:'4th',r:1.25},{g:'5th',r:1.00},{g:'6th',r:0.84}],
-    'AisinAL6':  [{g:'1st',r:5.13},{g:'2nd',r:2.63},{g:'3rd',r:1.53},{g:'4th',r:1.00},{g:'5th',r:0.81},{g:'6th',r:0.72}],
+    'D478':      [{g:'1st',r:5.13},{g:'2nd',r:2.63},{g:'3rd',r:1.53},{g:'4th',r:1.00},{g:'5th',r:0.81},{g:'6th',r:0.72}],
     '32RH':      [{g:'1st',r:2.74},{g:'2nd',r:1.54},{g:'3rd',r:1.00}],
     '42RLE':     [{g:'1st',r:2.84},{g:'2nd',r:1.57},{g:'3rd',r:1.00},{g:'4th',r:0.69}],
+    'W5A580':    [{g:'1st',r:3.59},{g:'2nd',r:2.19},{g:'3rd',r:1.41},{g:'4th',r:1.00},{g:'5th',r:0.83}],
     'AW4':       [{g:'1st',r:2.80},{g:'2nd',r:1.53},{g:'3rd',r:1.00},{g:'4th',r:0.75}],
     '8HP75':     [{g:'1st',r:4.71},{g:'2nd',r:3.13},{g:'3rd',r:2.10},{g:'4th',r:1.67},{g:'5th',r:1.28},{g:'6th',r:1.00},{g:'7th',r:0.84},{g:'8th',r:0.67}],
     'A750F':     [{g:'1st',r:3.52},{g:'2nd',r:2.04},{g:'3rd',r:1.40},{g:'4th',r:1.00},{g:'5th',r:0.71}],
@@ -794,8 +817,10 @@ const GEARS = {
 // add transKey to each vehicle so we can look up full gear arrays
 const VEHICLE_TRANS = {
     'tj-4cyl': 'AX-5', 'tj-6cyl-sport': 'AX-15', 'tj-sahara': 'NV3550', 'tj-rubicon': 'NSG370',
-    'jk-sport': 'NSG370', 'jk-rubicon': 'NSG370',
-    'jl-sport': 'AisinAL6', 'jl-sahara': '8HP75', 'jl-rubicon': 'AisinAL6', 'jl-rubicon-xr': '8HP75',
+    'jk-sport': 'NSG370', 'jk-sport-auto4': '42RLE', 'jk-sport-auto5': 'W5A580',
+    'jk-rubicon': 'NSG370', 'jk-rubicon-auto4': '42RLE', 'jk-rubicon-auto5': 'W5A580',
+    'jl-sport': 'D478', 'jl-sport-auto': '8HP75', 'jl-sahara': '8HP75',
+    'jl-rubicon': 'D478', 'jl-rubicon-auto': '8HP75', 'jl-rubicon-xr': '8HP75', 'jl-rubicon-xr-mt': 'D478',
     'xj-4cyl': 'AX-5', 'xj-6cyl': 'AX-15', 'xj-limited': 'AW4',
     'yj-4cyl': 'AX-5', 'yj-6cyl': 'AX-15',
     't4r-sr5-5th': 'A750F', 't4r-trdpro-5th': 'A750F', 't4r-4th': 'A340F',
@@ -1085,8 +1110,8 @@ document.addEventListener('click', function(e) {
 
 const TRANS_LABELS = {
     'AX-5': 'AX-5 (5-spd manual)', 'AX-15': 'AX-15 (5-spd manual)', 'NV3550': 'NV3550 (5-spd manual)',
-    'NSG370': 'NSG370 (6-spd manual)', 'AisinAL6': 'Aisin AL6 (6-spd auto)', '32RH': '32RH (3-spd auto)',
-    '42RLE': '42RLE (4-spd auto)', 'AW4': 'AW4 (4-spd auto)', '8HP75': 'ZF 8HP75 (8-spd auto)',
+    'NSG370': 'NSG370 (6-spd manual)', 'D478': 'Aisin D478 (6-spd manual)', '32RH': '32RH (3-spd auto)',
+    '42RLE': '42RLE (4-spd auto)', 'W5A580': 'W5A580 / NAG1 (5-spd auto)', 'AW4': 'AW4 (4-spd auto)', '8HP75': 'ZF 8HP75 / 850RE (8-spd auto)',
     'A750F': 'Toyota A750F (5-spd auto)', 'A340F': 'Toyota A340F (4-spd auto)', 'R151F': 'Toyota R151F (5-spd manual)',
     'AB60F': 'Toyota AB60F (6-spd auto)', '10R80': 'Ford 10R80 (10-spd auto)', 'Bronco7MT': 'Bronco 7MT (7-spd manual)',
     '8L45': 'GM 8L45 (8-spd auto)', 'RE5R05A': 'Nissan RE5R05A (5-spd auto)', 'Nissan6MT': 'Nissan 6MT (6-spd manual)',
@@ -1160,7 +1185,7 @@ function applyHelperSelections(key) {
 
 // ─── Copy Current → New ──────────────────────────────────────────────────────
 
-document.getElementById('copy-to-new').addEventListener('click', function() {
+function copyCurrentToNew() {
     ['tire', 'axle', 'trans', 'tc'].forEach(function(f) {
         document.getElementById('new-' + f).value = document.getElementById('cur-' + f).value;
     });
@@ -1173,6 +1198,9 @@ document.getElementById('copy-to-new').addEventListener('click', function() {
         document.getElementById('cur-crawl-label').textContent;
     updateChips('new-axle-chips', document.getElementById('new-axle').value);
     recalc();
+}
+document.querySelectorAll('.copy-to-new').forEach(function(btn) {
+    btn.addEventListener('click', copyCurrentToNew);
 });
 
 // ─── Metric tire converter ───────────────────────────────────────────────────
